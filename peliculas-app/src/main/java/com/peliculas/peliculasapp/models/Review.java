@@ -7,18 +7,27 @@ import java.sql.Timestamp;
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "review_id")
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "content_id", referencedColumnName = "id")
-    private Content content;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "content_id", referencedColumnName = "content_id")
+    private Content content;
+
+    @Column(name = "rating")
     private float rating;
+
+    @Column(name = "comment")
     private String comment;
+
+    @Column(name = "created_at", updatable = false, nullable = false)
     private Timestamp createdAt;
+
+    @Column(name = "updated_at", nullable = false)
     private Timestamp updatedAt;
 
     // Constructor privado para evitar la creacion directa de instancias

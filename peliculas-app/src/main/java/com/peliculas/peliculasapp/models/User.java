@@ -8,17 +8,26 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int userId;
+
+    @Column(name = "username", nullable = false)
     private String username;
+
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "created_at", updatable = false, nullable = false)
     private Timestamp createdAt;
 
-    // EAGER = Ansioso
-    // Lazy = Peresozo
+    @Column(name = "updated_at", nullable = false)
+    private Timestamp updatedAt;
+
     @OneToMany(mappedBy = "user")
     private List<Review> reviews;
-    private Timestamp updatedAt;
 
     // Constructor privado para builder
     public User() {}

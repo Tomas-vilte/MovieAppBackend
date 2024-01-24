@@ -6,14 +6,19 @@ import java.sql.Date;
 public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "content_id")
     private int id;
 
+    @Column(name = "title", nullable = false)
     private String title;
 
+    @Column(name = "release_date")
     private Date releaseDate;
 
+    @Column(name = "genre")
     private String genre;
 
+    @Column(name = "content_type", nullable = false)
     private String contentType;
 
 
