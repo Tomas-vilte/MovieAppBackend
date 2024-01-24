@@ -1,29 +1,32 @@
 package com.peliculas.peliculasapp.models;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    private int userId;
     private String username;
     private String password;
     private String email;
-    private Timestamp created_at;
-    private Timestamp updated_at;
+    private Timestamp createdAt;
+
+    // EAGER = Ansioso
+    // Lazy = Peresozo
+    private List<Object> commus;
+    private Timestamp updatedAt;
 
     // Constructor privado para builder
-    public Users() {}
+    public User() {}
 
     // Getters
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
     public String getUsername() {
@@ -38,24 +41,24 @@ public class Users {
         return email;
     }
 
-    public Timestamp getCreated_at() {
-        return created_at;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public Timestamp getUpdated_at() {
-        return updated_at;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
     // Clase builder
     public static class Builder {
-        private Users user;
+        private User user;
 
         public Builder() {
-            this.user = new Users();
+            this.user = new User();
         }
 
         public Builder setUser_id(int user_id) {
-            this.user.user_id = user_id;
+            this.user.userId = user_id;
             return this;
         }
 
@@ -75,16 +78,16 @@ public class Users {
         }
 
         public Builder setCreatedAt(Timestamp created_at) {
-            this.user.created_at = created_at;
+            this.user.createdAt = created_at;
             return this;
         }
 
         public Builder setUpdateAt(Timestamp update_at) {
-            this.user.updated_at = update_at;
+            this.user.updatedAt = update_at;
             return this;
         }
 
-        public Users build() {
+        public User build() {
             return this.user;
         }
     }

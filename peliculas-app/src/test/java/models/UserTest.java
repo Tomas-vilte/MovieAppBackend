@@ -1,8 +1,7 @@
 package models;
-import com.peliculas.peliculasapp.models.Users;
+import com.peliculas.peliculasapp.models.User;
 import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserTest {
@@ -11,7 +10,7 @@ public class UserTest {
      void testUserBuilder() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
-        Users user = new Users.Builder()
+        User user = new User.Builder()
                 .setUser_id(1)
                 .setUsername("joan")
                 .setPassword("elsabalero")
@@ -20,12 +19,12 @@ public class UserTest {
                 .setUpdateAt(now)
                 .build();
 
-        assertEquals(1, user.getUser_id());
+        assertEquals(1, user.getUserId());
         assertEquals("joan", user.getUsername());
         assertEquals("elsabalero", user.getPassword());
         assertEquals("joanseso@gmail.com", user.getEmail());
-        assertEquals(now, user.getCreated_at());
-        assertEquals(now, user.getUpdated_at());
+        assertEquals(now, user.getCreatedAt());
+        assertEquals(now, user.getUpdatedAt());
     }
 
 }
