@@ -1,8 +1,6 @@
 package com.peliculas.peliculasapp.models;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -18,7 +16,8 @@ public class User {
 
     // EAGER = Ansioso
     // Lazy = Peresozo
-    private List<Object> commus;
+    @OneToMany(mappedBy = "user")
+    private List<Review> reviews;
     private Timestamp updatedAt;
 
     // Constructor privado para builder
