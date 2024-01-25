@@ -1,6 +1,7 @@
-package com.peliculas.peliculasapp.models;
+package com.peliculas.peliculasapp.controller;
 
 
+import com.peliculas.peliculasapp.models.User;
 import com.peliculas.peliculasapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
