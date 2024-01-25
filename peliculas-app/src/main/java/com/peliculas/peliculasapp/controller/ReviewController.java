@@ -1,7 +1,7 @@
 package com.peliculas.peliculasapp.controller;
 
 
-import com.peliculas.peliculasapp.models.Review;
+import com.peliculas.peliculasapp.dto.ReviewDTO;
 import com.peliculas.peliculasapp.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class ReviewController {
     private ReviewRepository reviewRepository;
 
     @GetMapping("/byContentId/{contentId}")
-    public List<Review> getReviewsByContentId(@PathVariable Integer contentId) {
+    public List<ReviewDTO> getReviewsByContentId(@PathVariable Integer contentId) {
         return reviewRepository.getReviewsByContentId(contentId);
     }
 }
