@@ -11,11 +11,11 @@ public class Review {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "content_id", referencedColumnName = "content_id")
+    @JoinColumn(name = "content_id")
     private Content content;
 
     @Column(name = "rating")

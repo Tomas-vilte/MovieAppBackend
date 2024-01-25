@@ -13,16 +13,16 @@ public class UserTest {
         User user = new User.Builder()
                 .setUser_id(1)
                 .setUsername("joan")
-                .setPassword("elsabalero")
-                .setEmail("joanseso@gmail.com")
+                .setPassword("elsabaleroexample")
+                .setEmail("joanseso@example.com")
                 .setCreatedAt(now)
                 .setUpdateAt(now)
                 .build();
 
         assertEquals(1, user.getUserId());
         assertEquals("joan", user.getUsername());
-        assertEquals("elsabalero", user.getPassword());
-        assertEquals("joanseso@gmail.com", user.getEmail());
+        assertEquals("elsabaleroexample", user.getPassword());
+        assertEquals("joanseso@example.com", user.getEmail());
         assertEquals(now, user.getCreatedAt());
         assertEquals(now, user.getUpdatedAt());
     }
