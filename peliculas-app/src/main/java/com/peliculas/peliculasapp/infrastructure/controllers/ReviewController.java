@@ -1,8 +1,6 @@
-package com.peliculas.peliculasapp.controller;
-
-
+package com.peliculas.peliculasapp.infrastructure.controllers;
 import com.peliculas.peliculasapp.dto.ReviewDTO;
-import com.peliculas.peliculasapp.repository.ReviewRepository;
+import com.peliculas.peliculasapp.infrastructure.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,4 +1,4 @@
-package com.peliculas.peliculasapp.models;
+package com.peliculas.peliculasapp.domain.models;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;

@@ -1,7 +1,7 @@
-package com.peliculas.peliculasapp.service;
+package com.peliculas.peliculasapp.application.services;
 
 import com.peliculas.peliculasapp.dto.ReviewDTO;
-import com.peliculas.peliculasapp.repository.ReviewRepository;
+import com.peliculas.peliculasapp.infrastructure.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

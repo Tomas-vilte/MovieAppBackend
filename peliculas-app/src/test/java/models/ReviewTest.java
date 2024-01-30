@@ -1,7 +1,7 @@
 package models;
-import com.peliculas.peliculasapp.models.Content;
-import com.peliculas.peliculasapp.models.Review;
-import com.peliculas.peliculasapp.models.User;
+import com.peliculas.peliculasapp.domain.models.Content;
+import com.peliculas.peliculasapp.domain.models.Review;
+import com.peliculas.peliculasapp.domain.models.User;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

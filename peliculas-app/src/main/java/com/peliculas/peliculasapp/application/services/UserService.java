@@ -1,6 +1,6 @@
-package com.peliculas.peliculasapp.service;
-import com.peliculas.peliculasapp.models.User;
-import com.peliculas.peliculasapp.repository.UserRepository;
+package com.peliculas.peliculasapp.application.services;
+import com.peliculas.peliculasapp.domain.models.User;
+import com.peliculas.peliculasapp.infrastructure.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

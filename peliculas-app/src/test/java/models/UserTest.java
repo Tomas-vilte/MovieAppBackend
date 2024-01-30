@@ -1,5 +1,5 @@
 package models;
-import com.peliculas.peliculasapp.models.User;
+import com.peliculas.peliculasapp.domain.models.User;
 import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 import static org.junit.jupiter.api.Assertions.assertEquals;

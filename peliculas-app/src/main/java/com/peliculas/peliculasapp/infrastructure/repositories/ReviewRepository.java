@@ -1,6 +1,6 @@
-package com.peliculas.peliculasapp.repository;
+package com.peliculas.peliculasapp.infrastructure.repositories;
 import com.peliculas.peliculasapp.dto.ReviewDTO;
-import com.peliculas.peliculasapp.models.Review;
+import com.peliculas.peliculasapp.domain.models.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
