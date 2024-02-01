@@ -1,5 +1,5 @@
 package models;
-import com.peliculas.peliculasapp.domain.models.User;
+import com.peliculas.peliculasapp.infrastructure.entities.UserEntity;
 import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +10,7 @@ public class UserTest {
      void testUserBuilder() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
-        User user = new User.Builder()
+        UserEntity user = new UserEntity.Builder()
                 .setUser_id(1)
                 .setUsername("joan")
                 .setPassword("elsabaleroexample")

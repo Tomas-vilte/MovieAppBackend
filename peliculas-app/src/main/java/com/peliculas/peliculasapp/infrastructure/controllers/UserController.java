@@ -1,7 +1,7 @@
 package com.peliculas.peliculasapp.infrastructure.controllers;
 
 
-import com.peliculas.peliculasapp.domain.models.User;
+import com.peliculas.peliculasapp.infrastructure.entities.UserEntity;
 import com.peliculas.peliculasapp.application.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return userService.getAllUsers();
     }
 }

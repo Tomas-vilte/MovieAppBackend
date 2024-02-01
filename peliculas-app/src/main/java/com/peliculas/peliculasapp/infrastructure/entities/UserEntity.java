@@ -1,11 +1,11 @@
-package com.peliculas.peliculasapp.domain.models;
+package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -27,10 +27,10 @@ public class User {
     private Timestamp updatedAt;
 
     @OneToMany(mappedBy = "user")
-    private List<Review> reviews;
+    private List<ReviewEntity> reviews;
 
     // Constructor privado para builder
-    public User() {}
+    public UserEntity() {}
 
     // Getters
     public int getUserId() {
@@ -59,10 +59,10 @@ public class User {
 
     // Clase builder
     public static class Builder {
-        private User user;
+        private UserEntity user;
 
         public Builder() {
-            this.user = new User();
+            this.user = new UserEntity();
         }
 
         public Builder setUser_id(int user_id) {
@@ -95,7 +95,7 @@ public class User {
             return this;
         }
 
-        public User build() {
+        public UserEntity build() {
             return this.user;
         }
     }

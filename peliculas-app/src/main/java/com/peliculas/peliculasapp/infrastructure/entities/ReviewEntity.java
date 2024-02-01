@@ -1,10 +1,10 @@
-package com.peliculas.peliculasapp.domain.models;
+package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 
 @Entity
-public class Review {
+public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
@@ -12,11 +12,11 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "content_id")
-    private Content content;
+    private ContentEntity content;
 
     @Column(name = "rating")
     private float rating;
@@ -31,18 +31,18 @@ public class Review {
     private Timestamp updatedAt;
 
     // Constructor privado para evitar la creacion directa de instancias
-    private Review() {}
+    private ReviewEntity() {}
 
     // Getters
     public int getId() {
         return id;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public Content getContent() {
+    public ContentEntity getContent() {
         return content;
     }
 
@@ -63,18 +63,18 @@ public class Review {
     }
 
     public static class Builder {
-        private Review review;
+        private ReviewEntity review;
 
         public Builder() {
-            this.review = new Review();
+            this.review = new ReviewEntity();
         }
 
-        public Builder setUser(User user) {
+        public Builder setUser(UserEntity user) {
             this.review.user = user;
             return this;
         }
 
-        public Builder setContent(Content content) {
+        public Builder setContent(ContentEntity content) {
             this.review.content = content;
             return this;
         }
@@ -99,7 +99,7 @@ public class Review {
             return this;
         }
 
-        public Review build() {
+        public ReviewEntity build() {
             return this.review;
         }
     }
