@@ -1,7 +1,7 @@
 package models;
-import com.peliculas.peliculasapp.domain.models.Content;
-import com.peliculas.peliculasapp.domain.models.Review;
-import com.peliculas.peliculasapp.domain.models.User;
+import com.peliculas.peliculasapp.infrastructure.entities.ContentEntity;
+import com.peliculas.peliculasapp.infrastructure.entities.ReviewEntity;
+import com.peliculas.peliculasapp.infrastructure.entities.UserEntity;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,16 +13,16 @@ public class ReviewTest {
     void testReviewBuilder() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
 
-        Content content = new Content.Builder()
+        ContentEntity content = new ContentEntity.Builder()
                 .setContentId(5)
                 .build();
 
 
-        User user = new User.Builder()
+        UserEntity user = new UserEntity.Builder()
                 .setUser_id(1)
                 .build();
 
-        Review review = new Review.Builder()
+        ReviewEntity review = new ReviewEntity.Builder()
                 .setUser(user)
                 .setContent(content)
                 .setRating(4.5f)

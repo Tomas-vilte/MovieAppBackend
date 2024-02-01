@@ -1,9 +1,9 @@
-package com.peliculas.peliculasapp.domain.models;
+package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
-public class Content {
+public class ContentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "content_id")
@@ -23,7 +23,7 @@ public class Content {
 
 
     // Constructor privado para evitar la creacion de instancias
-    private Content() {}
+    private ContentEntity() {}
 
     public int getId() {
         return id;
@@ -46,10 +46,10 @@ public class Content {
     }
 
     public static class Builder {
-        private Content content;
+        private ContentEntity content;
 
         public Builder() {
-            this.content = new Content();
+            this.content = new ContentEntity();
         }
 
         public Builder setContentId(int contentId) {
@@ -77,7 +77,7 @@ public class Content {
             return this;
         }
 
-        public Content build() {
+        public ContentEntity build() {
             return this.content;
         }
     }
