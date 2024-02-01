@@ -11,6 +11,10 @@ public class Movie {
 
     private List<ProductionCompany> productionCompanies;
 
+    private List<Genre> genres;
+
+    private List<ProductionCountries> productionCountries;
+
     private String title;
 
     private float voteAverage;
