@@ -8,7 +8,15 @@ public class ApiConfiguration {
     @Value("${EXTERNAL_API_KEY}")
     private String externalApiToken;
 
+    @Value("${API_URL}")
+    private String apiUrl;
+
     public String getExternalApiToken() {
         return externalApiToken;
     }
+
+    public String getApiUrl() {
+        return apiUrl;
+    }
+
 }
