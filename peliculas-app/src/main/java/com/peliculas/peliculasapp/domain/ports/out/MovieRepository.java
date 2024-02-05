@@ -4,4 +4,5 @@ import com.peliculas.peliculasapp.domain.models.Movie;
 
 public interface MovieRepository {
     void saveMovieInfo(Movie movie);
+    Movie getMovieId(long movieId);
 }
