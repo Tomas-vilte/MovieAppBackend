@@ -4,4 +4,5 @@ import com.peliculas.peliculasapp.domain.models.TvSeries;
 
 public interface TvSeriesRepository {
     void saveTvSeriesInfo(TvSeries tvSeries);
+    TvSeries getTvSeriesById(long seriesId);
 }
