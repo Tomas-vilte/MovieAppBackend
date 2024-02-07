@@ -23,7 +23,7 @@ public class ExternalMovieEntity {
     private List<ProductionCompaniesEntity> productionCompanies;
 
     @OneToMany
-    private List<Genre> genres;
+    private List<GenreEntity> genres;
 
     @OneToMany
     private List<ProductionCountriesEntity> productionCountries;
@@ -47,7 +47,7 @@ public class ExternalMovieEntity {
 
     public ExternalMovieEntity() {}
 
-    public ExternalMovieEntity(long id, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<Genre> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
+    public ExternalMovieEntity(long id, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<GenreEntity> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
         this.id = id;
         this.overview = overview;
         this.status = status;
@@ -73,12 +73,16 @@ public class ExternalMovieEntity {
                 .map(ProductionCompaniesEntity::fromDomainModel)
                 .toList();
 
+        List<GenreEntity> genreEntities = movie.getGenres().stream()
+                .map(GenreEntity::fromDomainModel)
+                .toList();
+
         return new ExternalMovieEntity(
                 movie.getId(),
                 movie.getOverview(),
                 movie.getStatus(),
                 productionCompanyEntities,
-                movie.getGenres(),
+                genreEntities,
                 productionCountriesEntities,
                 movie.getTitle(),
                 movie.getVoteAverage(),
@@ -100,12 +104,16 @@ public class ExternalMovieEntity {
                 .map(ProductionCompaniesEntity::toDomainModel)
                 .collect(Collectors.toList());
 
+        List<Genre> genreList = this.genres.stream()
+                .map(GenreEntity::toDomainModel)
+                .collect(Collectors.toList());
+
         return new Movie(
                 id,
                 overview,
                 status,
                 productionCompanies,
-                genres,
+                genreList,
                 productionCountries,
                 title,
                 voteAverage,
