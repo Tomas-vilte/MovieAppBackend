@@ -1,6 +1,4 @@
 package com.peliculas.peliculasapp.infrastructure.controllers;
-
-
 import com.peliculas.peliculasapp.domain.ports.in.GetAndSaveInfoUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
