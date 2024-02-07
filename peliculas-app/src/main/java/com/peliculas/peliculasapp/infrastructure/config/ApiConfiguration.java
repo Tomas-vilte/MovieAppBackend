@@ -1,15 +1,16 @@
 package com.peliculas.peliculasapp.infrastructure.config;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.beans.factory.annotation.Value;
 
 @Configuration
 public class ApiConfiguration {
 
-    @Value("${EXTERNAL_API_KEY}")
-    private String externalApiToken;
+    private final String externalApiToken = System.getenv("EXTERNAL_API_KEY");
 
-    @Value("${API_URL}")
-    private String apiUrl;
+    private final String apiUrl = System.getenv("API_URL");
+
+    public void print() {
+        System.out.println("external" + externalApiToken);
+    }
 
     public String getExternalApiToken() {
         return externalApiToken;
