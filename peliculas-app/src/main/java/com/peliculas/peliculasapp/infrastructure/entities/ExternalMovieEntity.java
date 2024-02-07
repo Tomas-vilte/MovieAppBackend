@@ -20,7 +20,7 @@ public class ExternalMovieEntity {
     private String status;
 
     @OneToMany
-    private List<ProductionCompany> productionCompanies;
+    private List<ProductionCompaniesEntity> productionCompanies;
 
     @OneToMany
     private List<Genre> genres;
@@ -47,7 +47,7 @@ public class ExternalMovieEntity {
 
     public ExternalMovieEntity() {}
 
-    public ExternalMovieEntity(long id, String overview, String status, List<ProductionCompany> productionCompanies, List<Genre> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
+    public ExternalMovieEntity(long id, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<Genre> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
         this.id = id;
         this.overview = overview;
         this.status = status;
@@ -69,11 +69,15 @@ public class ExternalMovieEntity {
                 .map(ProductionCountriesEntity::fromDomainModel)
                 .toList();
 
+        List<ProductionCompaniesEntity> productionCompanyEntities = movie.getProductionCompanies().stream()
+                .map(ProductionCompaniesEntity::fromDomainModel)
+                .toList();
+
         return new ExternalMovieEntity(
                 movie.getId(),
                 movie.getOverview(),
                 movie.getStatus(),
-                movie.getProductionCompanies(),
+                productionCompanyEntities,
                 movie.getGenres(),
                 productionCountriesEntities,
                 movie.getTitle(),
@@ -90,6 +94,10 @@ public class ExternalMovieEntity {
     public Movie toDomainModel() {
         List<ProductionCountries> productionCountries = this.productionCountries.stream()
                 .map(ProductionCountriesEntity::toDomainModel)
+                .collect(Collectors.toList());
+
+        List<ProductionCompany> productionCompanies = this.productionCompanies.stream()
+                .map(ProductionCompaniesEntity::toDomainModel)
                 .collect(Collectors.toList());
 
         return new Movie(
