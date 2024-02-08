@@ -1,9 +1,9 @@
 package com.peliculas.peliculasapp.application.usecases;
 import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.domain.models.TvSeries;
-import com.peliculas.peliculasapp.domain.ports.in.GetAndSaveInfoUseCase;
-import com.peliculas.peliculasapp.domain.ports.out.MovieRepositoryPort;
-import com.peliculas.peliculasapp.domain.ports.out.TvSeriesRepository;
+import com.peliculas.peliculasapp.application.ports.in.GetAndSaveInfoUseCase;
+import com.peliculas.peliculasapp.application.ports.out.MovieRepositoryPort;
+import com.peliculas.peliculasapp.application.ports.out.TvSeriesRepository;
 import com.peliculas.peliculasapp.infrastructure.adapters.MovieDetailsAdapter;
 import org.springframework.stereotype.Service;
 

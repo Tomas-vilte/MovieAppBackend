@@ -1,8 +1,10 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "content")
 public class ContentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +22,9 @@ public class ContentEntity {
 
     @Column(name = "content_type", nullable = false)
     private String contentType;
+
+    @OneToMany(mappedBy = "content", fetch = FetchType.LAZY)
+    private List<ReviewEntity> reviews;
 
 
     // Constructor privado para evitar la creacion de instancias

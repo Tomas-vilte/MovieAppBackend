@@ -1,7 +1,5 @@
 package com.peliculas.peliculasapp.application.services;
-
-import com.peliculas.peliculasapp.domain.ports.in.GetAndSaveInfoUseCase;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.peliculas.peliculasapp.application.ports.in.GetAndSaveInfoUseCase;
 import org.springframework.stereotype.Service;
 
 

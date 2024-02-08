@@ -2,21 +2,26 @@ package com.peliculas.peliculasapp.application.services;
 
 import com.peliculas.peliculasapp.dto.ReviewDTO;
 import com.peliculas.peliculasapp.infrastructure.repositories.ReviewRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+@Service
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
-    @Autowired
     public ReviewService(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
 
 
-    public List<ReviewDTO> getReviewsByContentId(Integer contentId) {
-        return reviewRepository.getReviewsByContentId(contentId);
+    public Optional<ReviewDTO> getReviewsByContentId(int contentId) {
+        return reviewRepository.findReviewById(contentId);
+    }
+
+    public List<ReviewDTO> getAllReviews() {
+        return reviewRepository.findAllReviews();
     }
 }

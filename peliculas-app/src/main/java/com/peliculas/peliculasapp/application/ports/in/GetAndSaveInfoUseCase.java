@@ -1,4 +1,4 @@
-package com.peliculas.peliculasapp.domain.ports.in;
+package com.peliculas.peliculasapp.application.ports.in;
 
 public interface GetAndSaveInfoUseCase {
     void getAndSaveMovieInfo(long movieId);

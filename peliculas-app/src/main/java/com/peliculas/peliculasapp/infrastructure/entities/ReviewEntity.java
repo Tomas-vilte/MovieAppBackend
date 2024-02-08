@@ -1,9 +1,9 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
-
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "review")
 public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +24,10 @@ public class ReviewEntity {
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "created_at", updatable = false, nullable = false)
+    @Column(name = "created_at")
     private Timestamp createdAt;
 
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at")
     private Timestamp updatedAt;
 
     // Constructor privado para evitar la creacion directa de instancias
@@ -63,7 +63,7 @@ public class ReviewEntity {
     }
 
     public static class Builder {
-        private ReviewEntity review;
+        private final ReviewEntity review;
 
         public Builder() {
             this.review = new ReviewEntity();

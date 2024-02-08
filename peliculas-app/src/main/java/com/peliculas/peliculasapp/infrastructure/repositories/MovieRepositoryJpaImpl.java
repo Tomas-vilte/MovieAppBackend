@@ -1,18 +1,18 @@
 package com.peliculas.peliculasapp.infrastructure.repositories;
 import com.peliculas.peliculasapp.domain.models.Movie;
-import com.peliculas.peliculasapp.domain.ports.out.MovieRepositoryPort;
+import com.peliculas.peliculasapp.application.ports.out.MovieRepositoryPort;
 import com.peliculas.peliculasapp.infrastructure.entities.ExternalMovieEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class MovieRepositoryJpaImpl implements MovieRepositoryPort {
 
     private JpaRepository<ExternalMovieEntity, Long> MovieRepositoryJpa;
 
     public MovieRepositoryJpaImpl() {}
-
 
     @Override
     public Movie saveMovieInfo(Movie movie) {
