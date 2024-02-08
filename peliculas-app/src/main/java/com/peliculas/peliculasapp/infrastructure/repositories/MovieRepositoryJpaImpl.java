@@ -1,31 +1,28 @@
 package com.peliculas.peliculasapp.infrastructure.repositories;
 import com.peliculas.peliculasapp.domain.models.Movie;
-import com.peliculas.peliculasapp.domain.ports.out.MovieRepository;
+import com.peliculas.peliculasapp.domain.ports.out.MovieRepositoryPort;
 import com.peliculas.peliculasapp.infrastructure.entities.ExternalMovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-@Component
-public class MovieRepositoryJpaImpl implements MovieRepository {
+public class MovieRepositoryJpaImpl implements MovieRepositoryPort {
 
-    private final MovieRepositoryJpa movieRepositoryJpa;
+    private JpaRepository<ExternalMovieEntity, Long> MovieRepositoryJpa;
 
-    @Autowired
-    public MovieRepositoryJpaImpl(MovieRepositoryJpa movieRepositoryJpa) {
-        this.movieRepositoryJpa = movieRepositoryJpa;
-    }
+    public MovieRepositoryJpaImpl() {}
+
 
     @Override
     public Movie saveMovieInfo(Movie movie) {
         ExternalMovieEntity externalMovieEntity = ExternalMovieEntity.fromDomainModel(movie);
-        ExternalMovieEntity saveMovieEntity = movieRepositoryJpa.save(externalMovieEntity);
+        ExternalMovieEntity saveMovieEntity = MovieRepositoryJpa.save(externalMovieEntity);
         return saveMovieEntity.toDomainModel();
     }
 
     @Override
     public Optional<Movie> getMovieId(long movieId) {
-        return movieRepositoryJpa.findById(movieId).map(ExternalMovieEntity::toDomainModel);
+        return MovieRepositoryJpa.findById(movieId).map(ExternalMovieEntity::toDomainModel);
     }
 }

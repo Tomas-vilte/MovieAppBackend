@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
-    private final GetAndSaveInfoUseCase getAndSaveInfoUseCase;
+    private GetAndSaveInfoUseCase getAndSaveInfoUseCase;
+
+    public MovieController() {}
 
     @Autowired
     public MovieController(GetAndSaveInfoUseCase getAndSaveInfoUseCase) {

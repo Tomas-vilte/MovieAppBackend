@@ -1,8 +1,13 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-//@Entity
-//public class TvSeriesEntity {
-//}
+@Entity
+public class TvSeriesEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+}
