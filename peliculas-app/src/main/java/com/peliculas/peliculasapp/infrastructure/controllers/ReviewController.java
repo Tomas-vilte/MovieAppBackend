@@ -1,4 +1,5 @@
 package com.peliculas.peliculasapp.infrastructure.controllers;
+import com.peliculas.peliculasapp.application.services.ReviewService;
 import com.peliculas.peliculasapp.dto.ReviewDTO;
 import com.peliculas.peliculasapp.infrastructure.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,16 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/reviews")
+@RequestMapping("api/reviews")
 public class ReviewController {
 
-    @Autowired
-    private ReviewRepository reviewRepository;
+    private final ReviewService reviewService;
 
-    @GetMapping("/byContentId/{contentId}")
-    public List<ReviewDTO> getReviewsByContentId(@PathVariable Integer contentId) {
-        return reviewRepository.getReviewsByContentId(contentId);
+    public ReviewController(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
+
+    @GetMapping("/{id}")
+    public Optional<ReviewDTO> getReviewsByContentId(@PathVariable int id) {
+        return reviewService.getReviewsByContentId(id);
+    }
+
+    @GetMapping
+    public List<ReviewDTO> getAllReviews() {
+        return reviewService.getAllReviews();
     }
 }

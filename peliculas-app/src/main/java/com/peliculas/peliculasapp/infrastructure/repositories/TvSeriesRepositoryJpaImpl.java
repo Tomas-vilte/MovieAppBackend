@@ -1,7 +1,7 @@
 package com.peliculas.peliculasapp.infrastructure.repositories;
 
 import com.peliculas.peliculasapp.domain.models.TvSeries;
-import com.peliculas.peliculasapp.domain.ports.out.TvSeriesRepository;
+import com.peliculas.peliculasapp.application.ports.out.TvSeriesRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

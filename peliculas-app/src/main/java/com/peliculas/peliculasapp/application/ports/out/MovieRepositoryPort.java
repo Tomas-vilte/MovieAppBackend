@@ -1,4 +1,4 @@
-package com.peliculas.peliculasapp.domain.ports.out;
+package com.peliculas.peliculasapp.application.ports.out;
 import com.peliculas.peliculasapp.domain.models.Movie;
 import java.util.Optional;
 

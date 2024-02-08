@@ -1,5 +1,6 @@
-package com.peliculas.peliculasapp.domain.ports.out;
+package com.peliculas.peliculasapp.application.ports.out;
 import com.peliculas.peliculasapp.domain.models.TvSeries;
+
 import java.util.Optional;
 
 public interface TvSeriesRepository {
