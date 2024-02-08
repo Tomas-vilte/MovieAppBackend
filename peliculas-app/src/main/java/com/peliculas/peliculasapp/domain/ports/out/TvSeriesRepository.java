@@ -1,8 +1,8 @@
 package com.peliculas.peliculasapp.domain.ports.out;
-
 import com.peliculas.peliculasapp.domain.models.TvSeries;
+import java.util.Optional;
 
 public interface TvSeriesRepository {
     void saveTvSeriesInfo(TvSeries tvSeries);
-    TvSeries getTvSeriesById(long seriesId);
+    Optional<TvSeries> getTvSeriesById(long seriesId);
 }
