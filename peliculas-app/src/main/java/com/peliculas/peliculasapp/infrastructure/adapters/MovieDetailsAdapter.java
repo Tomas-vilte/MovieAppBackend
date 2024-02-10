@@ -1,8 +1,8 @@
 package com.peliculas.peliculasapp.infrastructure.adapters;
+import com.peliculas.peliculasapp.application.config.ApiConfiguration;
 import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.domain.models.TvSeries;
 import com.peliculas.peliculasapp.application.ports.out.ExternalServicePort;
-import com.peliculas.peliculasapp.infrastructure.config.ApiConfiguration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 

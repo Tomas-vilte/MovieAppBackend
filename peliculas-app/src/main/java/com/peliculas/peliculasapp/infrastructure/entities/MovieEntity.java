@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-public class ExternalMovieEntity {
+public class MovieEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,9 +45,9 @@ public class ExternalMovieEntity {
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
-    public ExternalMovieEntity() {}
+    public MovieEntity() {}
 
-    public ExternalMovieEntity(long id, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<GenreEntity> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
+    public MovieEntity(long id, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<GenreEntity> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
         this.id = id;
         this.overview = overview;
         this.status = status;
@@ -64,7 +64,7 @@ public class ExternalMovieEntity {
         this.releaseDate = releaseDate;
     }
 
-    public static ExternalMovieEntity fromDomainModel(Movie movie) {
+    public static MovieEntity fromDomainModel(Movie movie) {
         List<ProductionCountriesEntity> productionCountriesEntities = movie.getProductionCountries().stream()
                 .map(ProductionCountriesEntity::fromDomainModel)
                 .toList();
@@ -77,7 +77,7 @@ public class ExternalMovieEntity {
                 .map(GenreEntity::fromDomainModel)
                 .toList();
 
-        return new ExternalMovieEntity(
+        return new MovieEntity(
                 movie.getId(),
                 movie.getOverview(),
                 movie.getStatus(),

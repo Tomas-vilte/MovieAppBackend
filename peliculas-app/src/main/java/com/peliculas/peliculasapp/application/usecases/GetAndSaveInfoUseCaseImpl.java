@@ -25,7 +25,7 @@ public class GetAndSaveInfoUseCaseImpl implements GetAndSaveInfoUseCase {
     @Override
     public void getAndSaveMovieInfo(long movieId) {
         Movie movie = movieDetailsAdapter.getMovieInfoById(movieId);
-        movieRepository.saveMovieInfo(movie);
+        movieRepository.findById(movie);
     }
 
     @Override
