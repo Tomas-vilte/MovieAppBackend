@@ -11,7 +11,9 @@ public class ApiConfiguration {
         return dotenv.get("API_URL");
     }
 
-    public String getApiKey() { return dotenv.get("EXTERNAL_API_KEY");}
+    public String getApiKey() {
+        return dotenv.get("EXTERNAL_API_KEY");
+    }
 
     public static void printAllEnvVariables() {
         System.out.println("Variables de entorno:");
