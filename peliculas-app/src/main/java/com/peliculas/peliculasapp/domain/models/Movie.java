@@ -1,5 +1,7 @@
 package com.peliculas.peliculasapp.domain.models;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -37,9 +39,9 @@ public class Movie {
         this.id = id;
         this.overview = overview;
         this.status = status;
-        this.productionCompanies = productionCompanies;
+        this.productionCompanies = Collections.emptyList();
         this.genres = genres;
-        this.productionCountries = productionCountries;
+        this.productionCountries = Collections.emptyList();
         this.title = title;
         this.voteAverage = voteAverage;
         this.voteCount = voteCount;
