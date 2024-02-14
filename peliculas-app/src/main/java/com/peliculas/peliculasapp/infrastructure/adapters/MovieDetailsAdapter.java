@@ -3,8 +3,12 @@ import com.peliculas.peliculasapp.application.config.ApiConfiguration;
 import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.domain.models.TvSeries;
 import com.peliculas.peliculasapp.application.ports.out.ExternalServicePort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpHeaders;
 
 @Component
 public class MovieDetailsAdapter implements ExternalServicePort {
@@ -18,8 +22,9 @@ public class MovieDetailsAdapter implements ExternalServicePort {
 
     @Override
     public Movie getMovieInfoById(long movieId) {
-        String endpoint = apiConfiguration.getApiUrl() + "movie/" + movieId + "?language=es-MX";
-        return new RestTemplate().getForObject(endpoint, Movie.class);
+        String endpoint = apiConfiguration.getApiUrl() + "movie/" + movieId + "?language=es-MX&api_key=" + apiConfiguration.getApiKey();
+        ResponseEntity<Movie> response = new RestTemplate().getForEntity(endpoint, Movie.class);
+        return response.getBody();
     }
 
 
