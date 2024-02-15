@@ -22,7 +22,7 @@ public class MovieEntity {
     @OneToMany
     private List<ProductionCompaniesEntity> productionCompanies;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<GenreEntity> genres;
 
     @OneToMany
