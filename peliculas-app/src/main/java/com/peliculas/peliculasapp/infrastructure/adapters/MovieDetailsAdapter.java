@@ -19,6 +19,7 @@ public class MovieDetailsAdapter implements ExternalServicePort {
 
     @Override
     public Movie getMovieInfoById(long movieId) {
+        // TODO: refactor
         String endpoint = apiConfiguration.getApiUrl() + "movie/" + movieId + "?language=es-MX&api_key=" + apiConfiguration.getApiKey();
         ResponseEntity<Movie> response = new RestTemplate().getForEntity(endpoint, Movie.class);
         return response.getBody();
