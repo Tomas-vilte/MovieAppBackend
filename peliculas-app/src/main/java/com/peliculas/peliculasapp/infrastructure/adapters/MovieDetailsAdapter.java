@@ -9,10 +9,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class MovieDetailsAdapter implements ExternalServicePort {
-
     private final ApiConfiguration apiConfiguration;
+    private final RestTemplate restTemplate;
 
-    public MovieDetailsAdapter(ApiConfiguration apiConfiguration) {
+    public MovieDetailsAdapter(ApiConfiguration apiConfiguration, RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
         this.apiConfiguration = apiConfiguration;
     }
 
@@ -21,7 +22,7 @@ public class MovieDetailsAdapter implements ExternalServicePort {
     public Movie getMovieInfoById(long movieId) {
         // TODO: refactor
         String endpoint = apiConfiguration.getApiUrl() + "movie/" + movieId + "?language=es-MX&api_key=" + apiConfiguration.getApiKey();
-        ResponseEntity<Movie> response = new RestTemplate().getForEntity(endpoint, Movie.class);
+        ResponseEntity<Movie> response = restTemplate.getForEntity(endpoint, Movie.class);
         return response.getBody();
     }
 
