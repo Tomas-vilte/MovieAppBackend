@@ -1,14 +1,14 @@
 package com.peliculas.peliculasapp.infrastructure.adapters;
 import com.peliculas.peliculasapp.application.config.ApiConfiguration;
+import com.peliculas.peliculasapp.application.ports.out.MovieServicePort;
 import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.domain.models.TvSeries;
-import com.peliculas.peliculasapp.application.ports.out.ExternalServicePort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class MovieDetailsAdapter implements ExternalServicePort {
+public class MovieDetailsAdapter implements MovieServicePort {
     private final ApiConfiguration apiConfiguration;
     private final RestTemplate restTemplate;
 
@@ -25,12 +25,4 @@ public class MovieDetailsAdapter implements ExternalServicePort {
         ResponseEntity<Movie> response = restTemplate.getForEntity(endpoint, Movie.class);
         return response.getBody();
     }
-
-
-    @Override
-    public TvSeries getTvSeriesInfoById(long tvSeriesId) {
-        String endpoint = apiConfiguration.getApiUrl() + "tv/" + tvSeriesId + "?language=es-MX";
-        return new RestTemplate().getForObject(endpoint, TvSeries.class);
-    }
-
 }

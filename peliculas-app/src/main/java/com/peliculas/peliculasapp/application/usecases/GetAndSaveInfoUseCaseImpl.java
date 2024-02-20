@@ -5,21 +5,25 @@ import com.peliculas.peliculasapp.application.ports.in.GetAndSaveInfoUseCase;
 import com.peliculas.peliculasapp.application.ports.out.MovieRepositoryPort;
 import com.peliculas.peliculasapp.application.ports.out.TvSeriesRepository;
 import com.peliculas.peliculasapp.infrastructure.adapters.MovieDetailsAdapter;
+import com.peliculas.peliculasapp.infrastructure.adapters.SeriesDetailsAdapter;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class GetAndSaveInfoUseCaseImpl implements GetAndSaveInfoUseCase {
     private final MovieDetailsAdapter movieDetailsAdapter;
+    private final SeriesDetailsAdapter seriesDetailsAdapter;
     private final MovieRepositoryPort movieRepository;
     private final TvSeriesRepository tvSeriesRepository;
 
     public GetAndSaveInfoUseCaseImpl(
-            MovieDetailsAdapter movieDetailsAdapter, MovieRepositoryPort movieRepository, TvSeriesRepository tvSeriesRepository
+            MovieDetailsAdapter movieDetailsAdapter, MovieRepositoryPort movieRepository, TvSeriesRepository tvSeriesRepository,
+            SeriesDetailsAdapter seriesDetailsAdapter
     ) {
         this.movieDetailsAdapter = movieDetailsAdapter;
         this.tvSeriesRepository = tvSeriesRepository;
         this.movieRepository = movieRepository;
+        this.seriesDetailsAdapter = seriesDetailsAdapter;
     }
 
     @Override
@@ -30,8 +34,7 @@ public class GetAndSaveInfoUseCaseImpl implements GetAndSaveInfoUseCase {
 
     @Override
     public void getAndSaveTvSeriesInfo(long tvSeriesId) {
-        TvSeries tvSeries = movieDetailsAdapter.getTvSeriesInfoById(tvSeriesId);
-
+        TvSeries tvSeries = seriesDetailsAdapter.getTvSeriesInfoById(tvSeriesId);
         tvSeriesRepository.saveTvSeriesInfo(tvSeries);
     }
 }
