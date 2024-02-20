@@ -16,10 +16,10 @@ public class MovieRepositoryJpaImpl implements MovieRepositoryPort {
     }
 
     @Override
-    public Movie findById(Movie movie) {
+    public void findById(Movie movie) {
         MovieEntity externalMovieEntity = MovieEntity.fromDomainModel(movie);
         MovieEntity saveMovieEntity = movieRepositoryJpa.save(externalMovieEntity);
-        return saveMovieEntity.toDomainModel();
+        saveMovieEntity.toDomainModel();
     }
 
     @Override
