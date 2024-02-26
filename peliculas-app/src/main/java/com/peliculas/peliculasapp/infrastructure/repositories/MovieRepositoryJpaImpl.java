@@ -2,6 +2,7 @@ package com.peliculas.peliculasapp.infrastructure.repositories;
 import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.application.ports.out.MovieRepositoryPort;
 import com.peliculas.peliculasapp.infrastructure.entities.MovieEntity;
+import com.peliculas.peliculasapp.infrastructure.exceptions.MovieAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Optional;
@@ -16,14 +17,12 @@ public class MovieRepositoryJpaImpl implements MovieRepositoryPort {
     }
 
     @Override
-    public void findById(Movie movie) {
+    public Optional<Movie> saveMovie(Movie movie) {
+        if (movieRepositoryJpa.existsByMovieId(movie.getId())) {
+            throw new MovieAlreadyExistsException("Esta película ya se encuentra guardada");
+        }
         MovieEntity externalMovieEntity = MovieEntity.fromDomainModel(movie);
-        MovieEntity saveMovieEntity = movieRepositoryJpa.save(externalMovieEntity);
-        saveMovieEntity.toDomainModel();
-    }
-
-    @Override
-    public Optional<Movie> findById(long movieId) {
-        return movieRepositoryJpa.findById(movieId).map(MovieEntity::toDomainModel);
+        MovieEntity savedMovieEntity = movieRepositoryJpa.save(externalMovieEntity);
+        return savedMovieEntity.toDomainModel();
     }
 }
