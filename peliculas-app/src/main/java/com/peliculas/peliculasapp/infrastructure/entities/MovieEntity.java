@@ -6,14 +6,15 @@ import com.peliculas.peliculasapp.domain.models.ProductionCountries;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Entity
 public class MovieEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private long movieId;
 
     private String overview;
 
@@ -47,8 +48,8 @@ public class MovieEntity {
 
     public MovieEntity() {}
 
-    public MovieEntity(long id, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<GenreEntity> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
-        this.id = id;
+    public MovieEntity(long movieId, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<GenreEntity> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
+        this.movieId = movieId;
         this.overview = overview;
         this.status = status;
         this.productionCompanies = productionCompanies;
@@ -95,7 +96,7 @@ public class MovieEntity {
         );
     }
 
-    public Movie toDomainModel() {
+    public Optional<Movie> toDomainModel() {
         List<ProductionCountries> productionCountries = this.productionCountries.stream()
                 .map(ProductionCountriesEntity::toDomainModel)
                 .collect(Collectors.toList());
@@ -108,8 +109,8 @@ public class MovieEntity {
                 .map(GenreEntity::toDomainModel)
                 .collect(Collectors.toList());
 
-        return new Movie(
-                id,
+        return Optional.of(new Movie(
+                movieId,
                 overview,
                 status,
                 productionCompanies,
@@ -123,6 +124,6 @@ public class MovieEntity {
                 popularity,
                 posterPath,
                 releaseDate
-        );
+        ));
     }
 }

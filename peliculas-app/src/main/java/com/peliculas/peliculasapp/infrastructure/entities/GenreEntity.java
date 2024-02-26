@@ -1,6 +1,4 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-
-
 import com.peliculas.peliculasapp.domain.models.Genre;
 import jakarta.persistence.*;
 
@@ -17,7 +15,6 @@ public class GenreEntity {
 
     public static GenreEntity fromDomainModel(Genre genre) {
         GenreEntity genreEntity = new GenreEntity();
-        genreEntity.setId(genre.getId());
         genreEntity.setName(genre.getName());
         return genreEntity;
     }
