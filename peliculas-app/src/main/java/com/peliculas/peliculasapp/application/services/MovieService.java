@@ -1,6 +1,6 @@
 package com.peliculas.peliculasapp.application.services;
 import com.peliculas.peliculasapp.application.ports.in.GetAndSaveInfoUseCase;
-import com.peliculas.peliculasapp.domain.models.Movie;
+import com.peliculas.peliculasapp.dto.MovieDTO;
 import org.springframework.stereotype.Service;
 
 
@@ -12,7 +12,7 @@ public class MovieService {
         this.getAndSaveInfoUseCase = getAndSaveInfoUseCase;
     }
 
-    public void saveMovieInfo(long movieId) {
-        getAndSaveInfoUseCase.getAndSaveMovieInfo(movieId);
+    public MovieDTO saveMovieInfo(long movieId) {
+        return getAndSaveInfoUseCase.getAndSaveMovieInfo(movieId);
     }
 }

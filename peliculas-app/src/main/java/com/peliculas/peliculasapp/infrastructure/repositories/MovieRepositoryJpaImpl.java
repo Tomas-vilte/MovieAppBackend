@@ -18,11 +18,15 @@ public class MovieRepositoryJpaImpl implements MovieRepositoryPort {
 
     @Override
     public Optional<Movie> saveMovie(Movie movie) {
-        if (movieRepositoryJpa.existsByMovieId(movie.getId())) {
+        try {
+            if (movieRepositoryJpa.existsByMovieId(movie.getId())) {
+                throw new MovieAlreadyExistsException("Esta película ya se encuentra guardada");
+            }
+            MovieEntity externalMovieEntity = MovieEntity.fromDomainModel(movie);
+            MovieEntity savedMovieEntity = movieRepositoryJpa.save(externalMovieEntity);
+            return savedMovieEntity.toDomainModel();
+        } catch (MovieAlreadyExistsException e) {
             throw new MovieAlreadyExistsException("Esta película ya se encuentra guardada");
         }
-        MovieEntity externalMovieEntity = MovieEntity.fromDomainModel(movie);
-        MovieEntity savedMovieEntity = movieRepositoryJpa.save(externalMovieEntity);
-        return savedMovieEntity.toDomainModel();
     }
 }

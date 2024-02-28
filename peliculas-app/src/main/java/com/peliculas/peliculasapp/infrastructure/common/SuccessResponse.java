@@ -5,9 +5,20 @@ public class SuccessResponse {
     private int status;
     private String message;
 
-    public SuccessResponse(int status, String message) {
+    public Object getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Object movie) {
+        this.movie = movie;
+    }
+
+    private Object movie;
+
+    public SuccessResponse(int status, String message, Object movie) {
         this.status = status;
         this.message = message;
+        this.movie = movie;
     }
 
     public int getStatus() {

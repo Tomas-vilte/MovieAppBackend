@@ -26,7 +26,7 @@ public class MovieDetailsAdapter implements MovieServicePort {
             ResponseEntity<Movie> response = restTemplate.getForEntity(endpoint, Movie.class);
             return response.getBody();
         } catch (HttpClientErrorException.NotFound e) {
-            throw new MovieNotFoundException("Pelicula con ID: " + movieId + "no encontrada");
+            throw new MovieNotFoundException("Pelicula con ID: " + movieId + " no encontrada");
         }
         }
 }

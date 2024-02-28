@@ -1,6 +1,8 @@
 package com.peliculas.peliculasapp.application.ports.in;
 
+import com.peliculas.peliculasapp.dto.MovieDTO;
+
 public interface GetAndSaveInfoUseCase {
-    void getAndSaveMovieInfo(long movieId);
+    MovieDTO getAndSaveMovieInfo(long movieId);
     void getAndSaveTvSeriesInfo(long tvSeriesId);
 }
