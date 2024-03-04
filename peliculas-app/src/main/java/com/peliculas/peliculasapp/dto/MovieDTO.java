@@ -14,7 +14,7 @@ import java.util.List;
 public class MovieDTO {
     private String title;
     private String overview;
-    private Date releaseDate;
+    private Date release_date;
     private List<Genre> genres;
     private float popularity;
 }

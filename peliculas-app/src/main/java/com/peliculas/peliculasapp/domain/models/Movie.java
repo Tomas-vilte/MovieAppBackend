@@ -2,7 +2,6 @@ package com.peliculas.peliculasapp.domain.models;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -22,9 +21,9 @@ public class Movie {
 
     private String title;
 
-    private float voteAverage;
+    private float vote_average;
 
-    private int voteCount;
+    private float vote_count;
 
     private long revenue;
 
@@ -32,11 +31,11 @@ public class Movie {
 
     private float popularity;
 
-    private String posterPath;
+    private String poster_path;
 
-    private Date releaseDate;
+    private String release_date;
 
-    public Movie(long id, String overview, String status, List<ProductionCompany> productionCompanies, List<Genre> genres, List<ProductionCountries> productionCountries, String title, float voteAverage, int voteCount, long revenue, int budget, float popularity, String posterPath, Date releaseDate) {
+    public Movie(long id, String overview, String status, List<ProductionCompany> productionCompanies, List<Genre> genres, List<ProductionCountries> productionCountries, String title, float voteAverage, float voteCount, long revenue, int budget, float popularity, String posterPath, String releaseDate) {
         this.id = id;
         this.overview = overview;
         this.status = status;
@@ -44,12 +43,12 @@ public class Movie {
         this.genres = genres;
         this.productionCountries = Collections.emptyList();
         this.title = title;
-        this.voteAverage = voteAverage;
-        this.voteCount = voteCount;
+        this.vote_average = voteAverage;
+        this.vote_count = voteCount;
         this.revenue = revenue;
         this.budget = budget;
         this.popularity = popularity;
-        this.posterPath = posterPath;
-        this.releaseDate = releaseDate;
+        this.poster_path = posterPath;
+        this.release_date = releaseDate;
     }
 }
