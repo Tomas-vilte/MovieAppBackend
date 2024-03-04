@@ -4,7 +4,6 @@ import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.domain.models.ProductionCompany;
 import com.peliculas.peliculasapp.domain.models.ProductionCountries;
 import jakarta.persistence.*;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,9 +32,9 @@ public class MovieEntity {
 
     private float voteAverage;
 
-    private int voteCount;
+    private float voteCount;
 
-    private int revenue;
+    private long revenue;
 
     private int budget;
 
@@ -43,12 +42,11 @@ public class MovieEntity {
 
     private String posterPath;
 
-    @Temporal(TemporalType.DATE)
-    private Date releaseDate;
+    private String releaseDate;
 
     public MovieEntity() {}
 
-    public MovieEntity(long movieId, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<GenreEntity> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
+    public MovieEntity(long movieId, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<GenreEntity> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, float voteCount, long revenue, int budget, float popularity, String posterPath, String releaseDate) {
         this.movieId = movieId;
         this.overview = overview;
         this.status = status;
@@ -86,13 +84,13 @@ public class MovieEntity {
                 genreEntities,
                 productionCountriesEntities,
                 movie.getTitle(),
-                movie.getVoteAverage(),
-                movie.getVoteCount(),
+                movie.getVote_average(),
+                movie.getVote_count(),
                 movie.getRevenue(),
                 movie.getBudget(),
                 movie.getPopularity(),
-                movie.getPosterPath(),
-                movie.getReleaseDate()
+                movie.getPoster_path(),
+                movie.getRelease_date()
         );
     }
 
