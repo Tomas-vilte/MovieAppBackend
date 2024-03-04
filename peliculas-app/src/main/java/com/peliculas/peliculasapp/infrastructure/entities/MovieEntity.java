@@ -35,7 +35,7 @@ public class MovieEntity {
 
     private int voteCount;
 
-    private int revenue;
+    private long revenue;
 
     private int budget;
 
@@ -48,7 +48,7 @@ public class MovieEntity {
 
     public MovieEntity() {}
 
-    public MovieEntity(long movieId, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<GenreEntity> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, int revenue, int budget, float popularity, String posterPath, Date releaseDate) {
+    public MovieEntity(long movieId, String overview, String status, List<ProductionCompaniesEntity> productionCompanies, List<GenreEntity> genres, List<ProductionCountriesEntity> productionCountries, String title, float voteAverage, int voteCount, long revenue, int budget, float popularity, String posterPath, Date releaseDate) {
         this.movieId = movieId;
         this.overview = overview;
         this.status = status;
