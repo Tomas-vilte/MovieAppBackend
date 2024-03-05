@@ -1,7 +1,9 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
 import com.peliculas.peliculasapp.domain.models.Genre;
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 public class GenreEntity {
 
@@ -10,7 +12,7 @@ public class GenreEntity {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     public static GenreEntity fromDomainModel(Genre genre) {
@@ -18,15 +20,6 @@ public class GenreEntity {
         genreEntity.setName(genre.getName());
         return genreEntity;
     }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Genre toDomainModel() {
         return new Genre();
     }
