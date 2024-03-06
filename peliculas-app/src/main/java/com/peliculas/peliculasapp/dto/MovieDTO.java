@@ -9,6 +9,5 @@ public class MovieDTO {
     private String title;
     private String overview;
     private String release_date;
-    private List<Genre> genres;
     private float popularity;
 }
