@@ -15,6 +15,7 @@ public class MovieEntity {
     private long id;
     private long movieId;
 
+    @Column(length = 1500)
     private String overview;
 
     private String status;
