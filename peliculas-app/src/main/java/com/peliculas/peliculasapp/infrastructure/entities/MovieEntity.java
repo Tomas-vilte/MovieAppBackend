@@ -24,6 +24,7 @@ public class MovieEntity {
     private List<ProductionCompaniesEntity> productionCompanies;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private List<GenreEntity> genres;
 
     @OneToMany
