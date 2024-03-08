@@ -1,11 +1,13 @@
 package com.peliculas.peliculasapp.domain.models;
+import lombok.Data;
 
+@Data
 public class ProductionCompany {
     private long id;
 
     private String name;
 
-    private String logoPath;
+    private String logo_path;
 
-    private String originCountry;
+    private String origin_country;
 }

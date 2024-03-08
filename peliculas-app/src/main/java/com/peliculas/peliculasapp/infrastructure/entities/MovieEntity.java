@@ -21,6 +21,7 @@ public class MovieEntity {
     private String status;
 
     @OneToMany
+    @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private List<ProductionCompaniesEntity> productionCompanies;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -28,6 +29,7 @@ public class MovieEntity {
     private List<GenreEntity> genres;
 
     @OneToMany
+    @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private List<ProductionCountriesEntity> productionCountries;
 
     private String title;
@@ -66,11 +68,11 @@ public class MovieEntity {
     }
 
     public static MovieEntity fromDomainModel(Movie movie) {
-        List<ProductionCountriesEntity> productionCountriesEntities = movie.getProductionCountries().stream()
+        List<ProductionCountriesEntity> productionCountriesEntities = movie.getProduction_countries().stream()
                 .map(ProductionCountriesEntity::fromDomainModel)
                 .toList();
 
-        List<ProductionCompaniesEntity> productionCompanyEntities = movie.getProductionCompanies().stream()
+        List<ProductionCompaniesEntity> productionCompanyEntities = movie.getProduction_companies().stream()
                 .map(ProductionCompaniesEntity::fromDomainModel)
                 .toList();
 
