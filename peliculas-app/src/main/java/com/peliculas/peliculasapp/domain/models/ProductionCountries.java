@@ -1,14 +1,9 @@
 package com.peliculas.peliculasapp.domain.models;
+import lombok.Data;
 
+@Data
 public class ProductionCountries {
     private String name;
-    private String iso31661;
+    private String iso_3166_1;
 
-    public String getName() {
-        return name;
-    }
-
-    public String getIso31661() {
-        return iso31661;
-    }
 }

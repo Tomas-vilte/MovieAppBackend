@@ -1,11 +1,9 @@
 package com.peliculas.peliculasapp.domain.models;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import java.util.Collections;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class Movie {
     private long id;
 
@@ -13,11 +11,11 @@ public class Movie {
 
     private String status;
 
-    private List<ProductionCompany> productionCompanies;
+    private List<ProductionCompany> production_companies;
 
     private List<Genre> genres;
 
-    private List<ProductionCountries> productionCountries;
+    private List<ProductionCountries> production_countries;
 
     private String title;
 
@@ -39,9 +37,9 @@ public class Movie {
         this.id = id;
         this.overview = overview;
         this.status = status;
-        this.productionCompanies = Collections.emptyList();
+        this.production_companies = Collections.emptyList();
         this.genres = genres;
-        this.productionCountries = Collections.emptyList();
+        this.production_countries = Collections.emptyList();
         this.title = title;
         this.vote_average = voteAverage;
         this.vote_count = voteCount;
