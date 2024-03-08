@@ -28,5 +28,5 @@ public class MovieDetailsAdapter implements MovieServicePort {
         } catch (HttpClientErrorException.NotFound e) {
             throw new MovieNotFoundException("Pelicula con ID: " + movieId + " no encontrada");
         }
-        }
+    }
 }
