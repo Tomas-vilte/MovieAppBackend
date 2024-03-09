@@ -1,5 +1,7 @@
 package com.peliculas.peliculasapp.domain.models;
 
 public class Networks {
-    //TODO: Add attributes
+    private String logo_path;
+    private String name;
+    private String origin_country;
 }
