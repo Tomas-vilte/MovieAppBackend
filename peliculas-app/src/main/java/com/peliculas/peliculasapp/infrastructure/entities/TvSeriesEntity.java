@@ -27,7 +27,7 @@ public class TvSeriesEntity {
     private Networks networks;
     private int number_of_episodes;
     private int number_of_seasons;
-    private List<OriginCountry> origin_country;
+    private List<OriginCountryEntity> origin_country;
     private String original_language;
     private String original_name;
     private String overview;
