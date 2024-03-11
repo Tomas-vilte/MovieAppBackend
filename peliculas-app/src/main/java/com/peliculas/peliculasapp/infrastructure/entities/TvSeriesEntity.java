@@ -17,11 +17,11 @@ public class TvSeriesEntity {
     private String backdrop_path;
     private List<CreatedSeriesEntity> created_by;
     private String first_air_date;
-    private List<Genre> genres;
+    private List<GenreEntity> genres;
     private String homepage;
     private boolean in_production;
     private String last_air_date;
-    private LastEpisode last_episode_to_air;
+    private LastEpisodeEntity last_episode_to_air;
     private String name;
     private NextEpisode next_episode_to_air;
     private Networks networks;
