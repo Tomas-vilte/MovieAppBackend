@@ -24,7 +24,7 @@ public class TvSeriesEntity {
     private LastEpisodeEntity last_episode_to_air;
     private String name;
     private NextEpisodeEntity next_episode_to_air;
-    private Networks networks;
+    private NetworksEntity networks;
     private int number_of_episodes;
     private int number_of_seasons;
     private List<OriginCountryEntity> origin_country;
@@ -35,7 +35,7 @@ public class TvSeriesEntity {
     private String poster_path;
     private List<ProductionCompaniesEntity> production_companies;
     private List<ProductionCountriesEntity> production_countries;
-    private List<Seasons> seasons;
+    private List<SeasonsEntity> seasons;
     private List<SpokenLanguages> spoken_languages;
     private String status;
     private String tagline;
