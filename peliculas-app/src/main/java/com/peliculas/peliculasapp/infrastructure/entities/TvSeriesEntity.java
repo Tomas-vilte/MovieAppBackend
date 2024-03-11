@@ -36,7 +36,7 @@ public class TvSeriesEntity {
     private List<ProductionCompaniesEntity> production_companies;
     private List<ProductionCountriesEntity> production_countries;
     private List<SeasonsEntity> seasons;
-    private List<SpokenLanguages> spoken_languages;
+    private List<SpokenLanguagesEntity> spoken_languages;
     private String status;
     private String tagline;
     private float vote_average;
