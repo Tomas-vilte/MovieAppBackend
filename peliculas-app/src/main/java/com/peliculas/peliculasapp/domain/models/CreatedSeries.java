@@ -1,9 +1,8 @@
 package com.peliculas.peliculasapp.domain.models;
+import lombok.Data;
 
+@Data
 public class CreatedSeries {
-    private long id;
-
-    private long credit_id;
 
     private String name;
 

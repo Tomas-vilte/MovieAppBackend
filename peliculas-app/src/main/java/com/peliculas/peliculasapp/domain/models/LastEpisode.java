@@ -1,5 +1,8 @@
 package com.peliculas.peliculasapp.domain.models;
 
+import lombok.Data;
+
+@Data
 public class LastEpisode {
     private int id;
     private String name;

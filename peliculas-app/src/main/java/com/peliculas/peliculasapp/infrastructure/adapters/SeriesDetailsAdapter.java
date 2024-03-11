@@ -22,7 +22,7 @@ public class SeriesDetailsAdapter implements TvSeriesServicePort {
     @Override
     public TvSeries getTvSeriesInfoById(long tvSeriesId) {
         try {
-            String endpoint = apiConfiguration.getApiUrl() + "tv/" + tvSeriesId + "?language=es-MX";
+            String endpoint = apiConfiguration.getApiUrl() + "tv/" + tvSeriesId + "?language=es-MX&api_key=" + apiConfiguration.getApiKey();
             ResponseEntity<TvSeries> response = restTemplate.getForEntity(endpoint, TvSeries.class);
             return response.getBody();
         } catch (HttpClientErrorException.NotFound e) {
