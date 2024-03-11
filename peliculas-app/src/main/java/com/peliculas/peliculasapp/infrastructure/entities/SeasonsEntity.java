@@ -1,6 +1,8 @@
-package com.peliculas.peliculasapp.domain.models;
+package com.peliculas.peliculasapp.infrastructure.entities;
+import jakarta.persistence.Entity;
 
-public class Seasons {
+@Entity
+public class SeasonsEntity {
     private String airDate;
 
     private int episodeCount;

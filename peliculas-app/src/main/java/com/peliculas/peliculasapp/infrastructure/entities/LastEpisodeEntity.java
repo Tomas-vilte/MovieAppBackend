@@ -1,6 +1,8 @@
-package com.peliculas.peliculasapp.domain.models;
+package com.peliculas.peliculasapp.infrastructure.entities;
+import jakarta.persistence.Entity;
 
-public class LastEpisode {
+@Entity
+public class LastEpisodeEntity {
     private int id;
     private String name;
     private String overview;
