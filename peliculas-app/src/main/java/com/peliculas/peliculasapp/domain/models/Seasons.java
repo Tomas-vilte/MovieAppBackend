@@ -1,9 +1,11 @@
 package com.peliculas.peliculasapp.domain.models;
+import lombok.Data;
 
+@Data
 public class Seasons {
-    private String airDate;
+    private String air_date;
 
-    private int episodeCount;
+    private int episode_count;
 
     private long id;
 
@@ -11,9 +13,9 @@ public class Seasons {
 
     private String overview;
 
-    private String posterPath;
+    private String poster_path;
 
-    private int seasonNumber;
+    private int season_number;
 
-    private float voteAverage;
+    private float vote_average;
 }

@@ -1,6 +1,5 @@
 package com.peliculas.peliculasapp.infrastructure.controllers;
 import com.peliculas.peliculasapp.application.services.MovieService;
-import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.dto.MovieDTO;
 import com.peliculas.peliculasapp.infrastructure.common.ErrorResponse;
 import com.peliculas.peliculasapp.infrastructure.common.SuccessResponse;
@@ -9,9 +8,6 @@ import com.peliculas.peliculasapp.infrastructure.exceptions.MovieNotFoundExcepti
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
-
 
 @RestController
 @RequestMapping("api/movies")

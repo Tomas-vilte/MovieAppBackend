@@ -1,6 +1,5 @@
 package com.peliculas.peliculasapp.domain.models;
 import lombok.Data;
-
 import java.util.List;
 
 @Data
@@ -17,10 +16,10 @@ public class TvSeries {
     private LastEpisode last_episode_to_air;
     private String name;
     private NextEpisode next_episode_to_air;
-    private Networks networks;
+    private List<Networks> networks;
     private int number_of_episodes;
     private int number_of_seasons;
-    private List<OriginCountry> origin_country;
+    private List<String> origin_country;
     private String original_language;
     private String original_name;
     private String overview;

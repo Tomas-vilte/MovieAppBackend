@@ -1,5 +1,7 @@
 package com.peliculas.peliculasapp.domain.models;
+import lombok.Data;
 
+@Data
 public class NextEpisode {
     private int id;
     private String name;
