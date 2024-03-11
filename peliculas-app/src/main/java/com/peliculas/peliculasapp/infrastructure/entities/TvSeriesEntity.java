@@ -23,7 +23,7 @@ public class TvSeriesEntity {
     private String last_air_date;
     private LastEpisodeEntity last_episode_to_air;
     private String name;
-    private NextEpisode next_episode_to_air;
+    private NextEpisodeEntity next_episode_to_air;
     private Networks networks;
     private int number_of_episodes;
     private int number_of_seasons;
