@@ -1,8 +1,9 @@
 package com.peliculas.peliculasapp.domain.models;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class LastEpisode {
     private int id;
     private String name;
@@ -16,4 +17,6 @@ public class LastEpisode {
     private int season_number;
     private int show_id;
     private String still_path;
+
+
 }
