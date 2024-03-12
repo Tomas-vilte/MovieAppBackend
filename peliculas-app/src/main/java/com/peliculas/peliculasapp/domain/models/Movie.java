@@ -1,6 +1,5 @@
 package com.peliculas.peliculasapp.domain.models;
 import lombok.Data;
-import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -37,9 +36,9 @@ public class Movie {
         this.id = id;
         this.overview = overview;
         this.status = status;
-        this.production_companies = Collections.emptyList();
+        this.production_companies = productionCompanies;
         this.genres = genres;
-        this.production_countries = Collections.emptyList();
+        this.production_countries = productionCountries;
         this.title = title;
         this.vote_average = voteAverage;
         this.vote_count = voteCount;

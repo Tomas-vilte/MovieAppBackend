@@ -1,13 +1,13 @@
 package com.peliculas.peliculasapp.domain.models;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class Seasons {
     private String air_date;
 
     private int episode_count;
-
-    private long id;
 
     private String name;
 

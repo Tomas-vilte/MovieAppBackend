@@ -1,6 +1,7 @@
 package com.peliculas.peliculasapp.infrastructure.repositories;
 import com.peliculas.peliculasapp.domain.models.TvSeries;
 import com.peliculas.peliculasapp.application.ports.out.TvSeriesRepositoryPort;
+import com.peliculas.peliculasapp.infrastructure.entities.TvSeriesEntity;
 import com.peliculas.peliculasapp.infrastructure.exceptions.TvSeriesAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,8 +21,9 @@ public class TvSeriesRepositoryJpaImpl implements TvSeriesRepositoryPort {
           if (tvSeriesRepositoryJpa.existsById(tvSeries.getId())) {
               throw new TvSeriesAlreadyExistsException("Esta serie ya se encuentra guardada");
           }
-          TvSeries series = new TvSeries();
-          return Optional.of(series);
+          TvSeriesEntity tvSeriesEntity = TvSeriesEntity.fromDomainModel(tvSeries);
+          TvSeriesEntity savedTvSeries = tvSeriesRepositoryJpa.save(tvSeriesEntity);
+          return savedTvSeries.toDomainModel();
         } catch (TvSeriesAlreadyExistsException e) {
             throw new TvSeriesAlreadyExistsException("Esta serie ya se encuentra guardada");
         }
