@@ -1,6 +1,4 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-
-
 import com.peliculas.peliculasapp.domain.models.ProductionCompany;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,13 +18,29 @@ public class ProductionCompaniesEntity {
 
     private String originCountry;
 
+    public ProductionCompaniesEntity() {}
+
+    private ProductionCompaniesEntity(String name, String logoPath, String originCountry) {
+        this.name = name;
+        this.logoPath = logoPath;
+        this.originCountry = originCountry;
+    }
+
 
     public static ProductionCompaniesEntity fromDomainModel(ProductionCompany productionCompany) {
-        return new ProductionCompaniesEntity();
+        return new ProductionCompaniesEntity(
+                productionCompany.getName(),
+                productionCompany.getLogo_path(),
+                productionCompany.getOrigin_country()
+        );
     }
 
     public ProductionCompany toDomainModel() {
-        return new ProductionCompany();
+        return new ProductionCompany(
+                name,
+                logoPath,
+                originCountry
+        );
     }
 
 }

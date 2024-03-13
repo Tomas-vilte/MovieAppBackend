@@ -1,9 +1,10 @@
 package com.peliculas.peliculasapp.domain.models;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class ProductionCompany {
-    private long id;
 
     private String name;
 
