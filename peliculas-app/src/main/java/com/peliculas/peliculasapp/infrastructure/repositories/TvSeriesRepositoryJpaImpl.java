@@ -18,8 +18,6 @@ public class TvSeriesRepositoryJpaImpl implements TvSeriesRepositoryPort {
     @Override
     public Optional<TvSeries> saveTvSeries(TvSeries tvSeries) {
         try {
-          long id = 1;
-          Optional<TvSeriesEntity> data = tvSeriesRepositoryJpa.findById(id);
           if (tvSeriesRepositoryJpa.existsById(tvSeries.getId())) {
               throw new TvSeriesAlreadyExistsException("Esta serie ya se encuentra guardada");
           }
