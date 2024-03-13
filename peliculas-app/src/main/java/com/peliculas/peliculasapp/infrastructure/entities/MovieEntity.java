@@ -20,16 +20,16 @@ public class MovieEntity {
 
     private String status;
 
-    @OneToMany
-    @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_id")
     private List<ProductionCompaniesEntity> productionCompanies;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    @JoinColumn(name = "movie_id")
     private List<GenreEntity> genres;
 
-    @OneToMany
-    @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_id")
     private List<ProductionCountriesEntity> productionCountries;
 
     private String title;

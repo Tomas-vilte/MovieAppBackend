@@ -12,5 +12,5 @@ public interface MovieRepository extends JpaRepository<MovieEntity, Long> {
     @Transactional(readOnly = true)
     boolean existsByMovieId(final long id);
     @Transactional(readOnly = true)
-    Optional<MovieEntity> findByMovieId(final long id);
+    Optional<MovieEntity> findById(final long id);
 }

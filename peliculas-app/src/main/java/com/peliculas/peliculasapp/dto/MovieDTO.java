@@ -1,7 +1,5 @@
 package com.peliculas.peliculasapp.dto;
-import com.peliculas.peliculasapp.domain.models.Genre;
 import lombok.Data;
-import java.util.List;
 
 
 @Data

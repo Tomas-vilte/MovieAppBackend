@@ -3,9 +3,11 @@ import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.application.ports.in.GetAndSaveMovieInfoUseCase;
 import com.peliculas.peliculasapp.application.ports.out.MovieRepositoryPort;
 import com.peliculas.peliculasapp.dto.MovieDTO;
+import com.peliculas.peliculasapp.dto.MovieInfoDTO;
 import com.peliculas.peliculasapp.infrastructure.adapters.MovieDetailsAdapter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 
 @Service
@@ -27,6 +29,12 @@ public class GetAndSaveMovieInfoUseCaseImpl implements GetAndSaveMovieInfoUseCas
         Movie movie = movieDetailsAdapter.getMovieInfoById(movieId);
         movieRepository.saveMovie(movie);
         return modelMapper.map(movie, MovieDTO.class);
+    }
+
+    @Override
+    public MovieInfoDTO getMovieById(long movieId) {
+        Optional<Movie> movie = movieRepository.getMovieById(movieId);
+        return modelMapper.map(movie, MovieInfoDTO.class);
     }
 
 }
