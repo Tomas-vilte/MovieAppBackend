@@ -33,7 +33,7 @@ public class MovieRepositoryJpaImpl implements MovieRepositoryPort {
 
     @Override
     public Optional<Movie> getMovieById(long id) {
-        Optional<MovieEntity> movie = movieRepositoryJpa.findByMovieId(id);
+        Optional<MovieEntity> movie = movieRepositoryJpa.findById(id);
         return movie.orElseThrow(() -> new MovieNotFoundException("No se encontró la película con el ID: " + id)).toDomainModel();
     }
 }
