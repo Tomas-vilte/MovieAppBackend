@@ -1,6 +1,7 @@
 package com.peliculas.peliculasapp.infrastructure.controllers;
 import com.peliculas.peliculasapp.application.services.TvSeriesService;
 import com.peliculas.peliculasapp.dto.TvSeriesDTO;
+import com.peliculas.peliculasapp.dto.TvSeriesInfoDTO;
 import com.peliculas.peliculasapp.infrastructure.common.ErrorResponse;
 import com.peliculas.peliculasapp.infrastructure.common.SuccessResponse;
 import com.peliculas.peliculasapp.infrastructure.exceptions.TvSeriesAlreadyExistsException;
@@ -29,6 +30,18 @@ public class TvSeriesController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
         } catch (TvSeriesNotFoundException seriesNotFoundException) {
             ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Esta serie no se encuentra en el servicio externo", seriesNotFoundException.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+    }
+
+    @GetMapping("/{tvSeriesId}")
+    public ResponseEntity<?> getTvSeriesById(@PathVariable long tvSeriesId) {
+        try {
+            TvSeriesInfoDTO seriesInfoDTO = tvSeriesService.getTvSeriesInfoById(tvSeriesId);
+            SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(), "Serie obtenida con exito", seriesInfoDTO);
+            return ResponseEntity.ok(successResponse);
+        } catch (TvSeriesNotFoundException e) {
+            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Esta serie no se encuentra en nuestra base de datos", e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
     }

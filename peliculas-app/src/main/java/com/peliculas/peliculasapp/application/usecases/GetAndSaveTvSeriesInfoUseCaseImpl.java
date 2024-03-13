@@ -3,9 +3,12 @@ import com.peliculas.peliculasapp.application.ports.in.GetAndSaveTvSeriesInfoUse
 import com.peliculas.peliculasapp.application.ports.out.TvSeriesRepositoryPort;
 import com.peliculas.peliculasapp.domain.models.TvSeries;
 import com.peliculas.peliculasapp.dto.TvSeriesDTO;
+import com.peliculas.peliculasapp.dto.TvSeriesInfoDTO;
 import com.peliculas.peliculasapp.infrastructure.adapters.SeriesDetailsAdapter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class GetAndSaveTvSeriesInfoUseCaseImpl implements GetAndSaveTvSeriesInfoUseCase {
@@ -26,5 +29,11 @@ public class GetAndSaveTvSeriesInfoUseCaseImpl implements GetAndSaveTvSeriesInfo
         TvSeries tvSeries = seriesDetailsAdapter.getTvSeriesInfoById(tvSeriesId);
         tvSeriesRepositoryPort.saveTvSeries(tvSeries);
         return modelMapper.map(tvSeries, TvSeriesDTO.class);
+    }
+
+    @Override
+    public TvSeriesInfoDTO getTvSeriesInfoById(long tvSeriesId) {
+        Optional<TvSeries> tvSeriesEntity = tvSeriesRepositoryPort.getTvSeriesInfo(tvSeriesId);
+        return modelMapper.map(tvSeriesEntity, TvSeriesInfoDTO.class);
     }
 }

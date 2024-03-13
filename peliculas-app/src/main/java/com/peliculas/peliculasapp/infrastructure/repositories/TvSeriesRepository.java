@@ -9,5 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface TvSeriesRepository extends JpaRepository<TvSeriesEntity, Long> {
     @Transactional(readOnly = true)
-    boolean existsById(final long id);
+    boolean existsByName(String name);
 }

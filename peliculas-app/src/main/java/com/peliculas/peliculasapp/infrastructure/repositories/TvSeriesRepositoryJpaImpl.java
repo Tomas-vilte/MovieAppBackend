@@ -3,6 +3,7 @@ import com.peliculas.peliculasapp.domain.models.TvSeries;
 import com.peliculas.peliculasapp.application.ports.out.TvSeriesRepositoryPort;
 import com.peliculas.peliculasapp.infrastructure.entities.TvSeriesEntity;
 import com.peliculas.peliculasapp.infrastructure.exceptions.TvSeriesAlreadyExistsException;
+import com.peliculas.peliculasapp.infrastructure.exceptions.TvSeriesNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class TvSeriesRepositoryJpaImpl implements TvSeriesRepositoryPort {
     @Override
     public Optional<TvSeries> saveTvSeries(TvSeries tvSeries) {
         try {
-          if (tvSeriesRepositoryJpa.existsById(tvSeries.getId())) {
+          if (tvSeriesRepositoryJpa.existsByName(tvSeries.getName())) {
               throw new TvSeriesAlreadyExistsException("Esta serie ya se encuentra guardada");
           }
           TvSeriesEntity tvSeriesEntity = TvSeriesEntity.fromDomainModel(tvSeries);
@@ -27,5 +28,11 @@ public class TvSeriesRepositoryJpaImpl implements TvSeriesRepositoryPort {
         } catch (TvSeriesAlreadyExistsException e) {
             throw new TvSeriesAlreadyExistsException("Esta serie ya se encuentra guardada");
         }
+    }
+
+    @Override
+    public Optional<TvSeries> getTvSeriesInfo(long tvSeriesId) {
+        Optional<TvSeriesEntity> tvSeriesEntity = tvSeriesRepositoryJpa.findById(tvSeriesId);
+        return tvSeriesEntity.orElseThrow(() -> new TvSeriesNotFoundException("Serie con encontrada con el ID: " + tvSeriesId)).toDomainModel();
     }
 }
