@@ -5,5 +5,5 @@ import com.peliculas.peliculasapp.dto.TvSeriesInfoDTO;
 public interface GetAndSaveTvSeriesInfoUseCase {
     TvSeriesDTO getAndSaveTvSeriesInfo(long tvSeriesId);
 
-    TvSeriesInfoDTO getTvSeriesInfo(long tvSeriesId);
+    TvSeriesInfoDTO getTvSeriesInfoById(long tvSeriesId);
 }

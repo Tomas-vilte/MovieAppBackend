@@ -32,7 +32,7 @@ public class GetAndSaveTvSeriesInfoUseCaseImpl implements GetAndSaveTvSeriesInfo
     }
 
     @Override
-    public TvSeriesInfoDTO getTvSeriesInfo(long tvSeriesId) {
+    public TvSeriesInfoDTO getTvSeriesInfoById(long tvSeriesId) {
         Optional<TvSeries> tvSeriesEntity = tvSeriesRepositoryPort.getTvSeriesInfo(tvSeriesId);
         return modelMapper.map(tvSeriesEntity, TvSeriesInfoDTO.class);
     }
