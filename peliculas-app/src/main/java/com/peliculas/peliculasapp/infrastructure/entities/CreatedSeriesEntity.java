@@ -14,12 +14,28 @@ public class CreatedSeriesEntity {
     private int gender;
     private String profilePath;
 
+    public CreatedSeriesEntity() {}
+
+    public CreatedSeriesEntity(String name, int gender, String profilePath) {
+        this.name = name;
+        this.gender = gender;
+        this.profilePath = profilePath;
+    }
+
     public static CreatedSeriesEntity fromDomainModel(CreatedSeries createdSeries) {
-        return new CreatedSeriesEntity();
+        return new CreatedSeriesEntity(
+                createdSeries.getName(),
+                createdSeries.getGender(),
+                createdSeries.getProfile_path()
+        );
     }
 
     public CreatedSeries toDomainModel() {
-        return new CreatedSeries();
+        return new CreatedSeries(
+                name,
+                gender,
+                profilePath
+        );
     }
 
 }
