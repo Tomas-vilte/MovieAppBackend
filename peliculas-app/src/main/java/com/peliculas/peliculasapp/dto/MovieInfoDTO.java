@@ -3,10 +3,11 @@ import com.peliculas.peliculasapp.domain.models.Genre;
 import com.peliculas.peliculasapp.domain.models.ProductionCompany;
 import com.peliculas.peliculasapp.domain.models.ProductionCountries;
 import lombok.Data;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class MovieInfoDTO {
+public class MovieInfoDTO implements Serializable {
     private String title;
     private String homepage;
     private String overview;
