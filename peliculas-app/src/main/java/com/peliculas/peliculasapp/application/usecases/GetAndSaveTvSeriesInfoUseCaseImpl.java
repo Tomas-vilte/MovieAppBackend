@@ -6,8 +6,8 @@ import com.peliculas.peliculasapp.dto.TvSeriesDTO;
 import com.peliculas.peliculasapp.dto.TvSeriesInfoDTO;
 import com.peliculas.peliculasapp.infrastructure.adapters.SeriesDetailsAdapter;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -15,14 +15,17 @@ public class GetAndSaveTvSeriesInfoUseCaseImpl implements GetAndSaveTvSeriesInfo
     private final TvSeriesRepositoryPort tvSeriesRepositoryPort;
     private final SeriesDetailsAdapter seriesDetailsAdapter;
     private final ModelMapper modelMapper;
+    private final ValueOperations<String, Object> valueOperations;
 
     public GetAndSaveTvSeriesInfoUseCaseImpl(TvSeriesRepositoryPort tvSeriesRepositoryPort,
                                              SeriesDetailsAdapter seriesDetailsAdapter,
-                                             ModelMapper modelMapper)
+                                             ModelMapper modelMapper,
+                                             ValueOperations<String, Object> valueOperations)
     {
         this.tvSeriesRepositoryPort = tvSeriesRepositoryPort;
         this.seriesDetailsAdapter = seriesDetailsAdapter;
         this.modelMapper = modelMapper;
+        this.valueOperations = valueOperations;
     }
     @Override
     public TvSeriesDTO getAndSaveTvSeriesInfo(long tvSeriesId) {

@@ -4,6 +4,5 @@ import java.util.Optional;
 
 public interface MovieRepositoryPort {
     Optional<Movie> saveMovie(Movie movie);
-    
     Optional<Movie> getMovieById(long id);
 }
