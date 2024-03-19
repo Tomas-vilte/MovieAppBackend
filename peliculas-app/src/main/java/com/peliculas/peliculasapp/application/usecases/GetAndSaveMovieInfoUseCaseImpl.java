@@ -6,8 +6,7 @@ import com.peliculas.peliculasapp.dto.MovieDTO;
 import com.peliculas.peliculasapp.dto.MovieInfoDTO;
 import com.peliculas.peliculasapp.infrastructure.adapters.MovieDetailsAdapter;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.Optional;
@@ -18,15 +17,16 @@ public class GetAndSaveMovieInfoUseCaseImpl implements GetAndSaveMovieInfoUseCas
     private final MovieDetailsAdapter movieDetailsAdapter;
     private final MovieRepositoryPort movieRepository;
     private final ModelMapper modelMapper;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final ValueOperations<String, Object> valueOperations;
+
 
     public GetAndSaveMovieInfoUseCaseImpl(
-            MovieDetailsAdapter movieDetailsAdapter, MovieRepositoryPort movieRepository, ModelMapper modelMapper, RedisTemplate<String, Object> redisTemplate
-            ) {
+            MovieDetailsAdapter movieDetailsAdapter, MovieRepositoryPort movieRepository, ModelMapper modelMapper, ValueOperations<String, Object> valueOperations
+    ) {
         this.movieDetailsAdapter = movieDetailsAdapter;
         this.movieRepository = movieRepository;
         this.modelMapper = modelMapper;
-        this.redisTemplate = redisTemplate;
+        this.valueOperations = valueOperations;
     }
 
     @Override
@@ -50,12 +50,12 @@ public class GetAndSaveMovieInfoUseCaseImpl implements GetAndSaveMovieInfoUseCas
 
     private MovieInfoDTO getMovieFromCache(long movieId) {
         System.out.println("Intentando obtener película desde la caché...");
-        return (MovieInfoDTO) redisTemplate.opsForValue().get("movie:" + movieId);
+        return (MovieInfoDTO) valueOperations.get("movie:" + movieId); // Utiliza valueOperations aquí
     }
 
     private void storeMovieInCache(long movieId, MovieInfoDTO movieInfoDTO) {
         System.out.println("Guardando película en la caché...");
-        redisTemplate.opsForValue().set("movie:" + movieId, movieInfoDTO, Duration.ofMinutes(1));
+        valueOperations.set("movie:" + movieId, movieInfoDTO, Duration.ofMinutes(1)); // Utiliza valueOperations aquí
     }
 
     private MovieInfoDTO getMovieFromDatabase(long movieId) {

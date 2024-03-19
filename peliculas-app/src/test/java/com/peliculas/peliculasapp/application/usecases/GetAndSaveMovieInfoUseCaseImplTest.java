@@ -1,5 +1,4 @@
 package com.peliculas.peliculasapp.application.usecases;
-
 import com.peliculas.peliculasapp.application.ports.in.GetAndSaveMovieInfoUseCase;
 import com.peliculas.peliculasapp.application.ports.out.MovieRepositoryPort;
 import com.peliculas.peliculasapp.domain.models.Genre;
@@ -11,19 +10,15 @@ import com.peliculas.peliculasapp.dto.MovieInfoDTO;
 import com.peliculas.peliculasapp.infrastructure.adapters.MovieDetailsAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-
-
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -42,26 +37,23 @@ class GetAndSaveMovieInfoUseCaseImplTest {
         movieRepository = Mockito.mock(MovieRepositoryPort.class);
         modelMapper = Mockito.mock(ModelMapper.class);
         redisTemplate = Mockito.mock(RedisTemplate.class);
+        valueOperations = Mockito.mock(ValueOperations.class);
+
+        when(redisTemplate.opsForValue()).thenReturn(valueOperations);
 
         service = new GetAndSaveMovieInfoUseCaseImpl(
                 movieDetailsAdapter,
                 movieRepository,
                 modelMapper,
-                redisTemplate
+                valueOperations
         );
-        when(redisTemplate.opsForValue()).thenReturn(valueOperations);
     }
-
-    @Test
-    void testGetMovieByIdFromDatabase() {
+    @Test void testGetMovieByIdFromCache() {
         // Arrange
-        long movieId = 123;
+        long movieId = 1011985;
         MovieInfoDTO expectedMovieInfoDTO = createSampleMovieInfoDTO();
-        Optional<Movie> optionalMovie = Optional.of(Movie.ofTesting()); // Mock your Optional<Movie> here
 
-        when(valueOperations.get(anyString())).thenReturn(null);
-        when(movieRepository.getMovieById(anyLong())).thenReturn(optionalMovie);
-        when(modelMapper.map(optionalMovie, MovieInfoDTO.class)).thenReturn(expectedMovieInfoDTO);
+        when(valueOperations.get("movie:" + movieId)).thenReturn(expectedMovieInfoDTO);
 
         // Act
         MovieInfoDTO result = service.getMovieById(movieId);
@@ -69,9 +61,67 @@ class GetAndSaveMovieInfoUseCaseImplTest {
         // Assert
         assertEquals(expectedMovieInfoDTO, result);
         verify(valueOperations, times(1)).get("movie:" + movieId);
-        verify(valueOperations, times(1)).set("movie:" + movieId, expectedMovieInfoDTO);
+        verify(movieRepository, never()).getMovieById(movieId);
+    }
+    @Test
+    void testGetAndSaveMovieInfo() {
+        // Arrange
+        long movieId = 2;
+        MovieDTO expectedMovieDTO = new MovieDTO();
+        expectedMovieDTO.setTitle("Sample Title");
+        expectedMovieDTO.setOverview("Sample Overview");
+        expectedMovieDTO.setRelease_date("2024-03-18");
+        expectedMovieDTO.setPopularity(8.5f);
+
+
+        Movie movie = ofTesting();
+        when(movieDetailsAdapter.getMovieInfoById(movieId)).thenReturn(movie);
+        when(modelMapper.map(movie, MovieDTO.class)).thenReturn(expectedMovieDTO);
+
+        // Act
+        MovieDTO result = service.getAndSaveMovieInfo(movieId);
+
+        // Assert
+        assertEquals(expectedMovieDTO, result);
+        verify(movieRepository, times(1)).saveMovie(movie);
+    }
+
+    @Test
+    void testGetMovieByIdFromDatabase() {
+        // Arrange
+        long movieId = 1011985;
+        MovieInfoDTO expectedMovieInfoDTO = createSampleMovieInfoDTO();
+
+        Optional<Movie> optionalMovie = Optional.of(ofTesting());
+        when(movieRepository.getMovieById(movieId)).thenReturn(optionalMovie);
+        when(modelMapper.map(any(), eq(MovieInfoDTO.class))).thenReturn(expectedMovieInfoDTO);
+
+        // act
+        MovieInfoDTO result = service.getMovieById(movieId);
+
+        // assert
+        assertNotNull(result);
+        assertEquals(expectedMovieInfoDTO, result);
+        verify(redisTemplate, atMost(1)).opsForValue();
         verify(movieRepository, times(1)).getMovieById(movieId);
-        verify(modelMapper, times(1)).map(optionalMovie, MovieInfoDTO.class);
+        verify(valueOperations, times(1)).set(eq("movie:" + movieId), eq(expectedMovieInfoDTO), eq(Duration.ofMinutes(1)));
+    }
+
+    @Test
+    void testGetMovieByIdFromDatabaseWhenMovieDoesNotExist() {
+        // Arrange
+        long movieId = 1011985;
+
+        Optional<Movie> optionalMovie = Optional.empty();
+        when(movieRepository.getMovieById(movieId)).thenReturn(optionalMovie);
+
+        // Act
+        MovieInfoDTO result = service.getMovieById(movieId);
+
+        // Assert
+        assertNull(result);
+        verify(redisTemplate, never()).opsForValue(); // Verificar que no se llama a opsForValue() si la película no se encuentra en la base de datos
+        verify(movieRepository, times(1)).getMovieById(movieId);
     }
 
     private MovieInfoDTO createSampleMovieInfoDTO() {
@@ -108,5 +158,23 @@ class GetAndSaveMovieInfoUseCaseImplTest {
         movieInfoDTO.setPoster_path("/poster.jpg");
 
         return movieInfoDTO;
+    }
+    private Movie ofTesting() {
+        long id = 1;
+        String overview = "Descripcion de la pelicula";
+        String status = "Estado de la pelcula";
+        List<ProductionCompany> productionCompanies = new ArrayList<>();
+        List<Genre> genres = new ArrayList<>();
+        List<ProductionCountries> productionCountries = new ArrayList<>();
+        String title = "ttulo de la pelicula";
+        float voteAverage = 4.5f;
+        float voteCount = 1000;
+        long revenue = 1000000;
+        int budget = 500000;
+        String posterPath = "/poster.jpg";
+        float popularity = 7.8f;
+        String releaseDate = "2024-03-18";
+
+        return new Movie(id, overview, status, productionCompanies, genres, productionCountries, title, voteAverage, voteCount, revenue, budget, popularity, posterPath, releaseDate);
     }
 }
