@@ -50,27 +50,4 @@ public class Movie {
         this.poster_path = posterPath;
         this.release_date = releaseDate;
     }
-
-    public static Movie ofTesting() {
-        long id = 1;
-        String overview = "Descripcion de la pelicula";
-        String status = "Estado de la pelcula";
-        List<ProductionCompany> productionCompanies = new ArrayList<>();
-
-        List<Genre> genres = new ArrayList<>();
-
-        List<ProductionCountries> productionCountries = new ArrayList<>();
-
-        String title = "ttulo de la pelicula";
-        float voteAverage = 4.5f;
-        float voteCount = 1000;
-        long revenue = 1000000;
-        int budget = 500000;
-        String posterPath = "/poster.jpg";
-        float popularity = 7.8f;
-        String releaseDate = "2024-03-18";
-
-        return new Movie(id, overview, status, productionCompanies, genres, productionCountries, title, voteAverage, voteCount, revenue, budget, popularity, posterPath, releaseDate);
-    }
-
 }
