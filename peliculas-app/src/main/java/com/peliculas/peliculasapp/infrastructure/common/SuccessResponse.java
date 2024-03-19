@@ -1,17 +1,13 @@
 package com.peliculas.peliculasapp.infrastructure.common;
-import com.peliculas.peliculasapp.domain.models.Movie;
+import lombok.Getter;
+import lombok.Setter;
+import java.io.Serializable;
 
-public class SuccessResponse {
+@Getter
+@Setter
+public class SuccessResponse implements Serializable {
     private int status;
     private String message;
-
-    public Object getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Object movie) {
-        this.movie = movie;
-    }
 
     private Object movie;
 
@@ -19,21 +15,5 @@ public class SuccessResponse {
         this.status = status;
         this.message = message;
         this.movie = movie;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

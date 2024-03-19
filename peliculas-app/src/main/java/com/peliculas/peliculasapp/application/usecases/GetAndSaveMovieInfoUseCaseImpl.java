@@ -6,7 +6,10 @@ import com.peliculas.peliculasapp.dto.MovieDTO;
 import com.peliculas.peliculasapp.dto.MovieInfoDTO;
 import com.peliculas.peliculasapp.infrastructure.adapters.MovieDetailsAdapter;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import java.time.Duration;
 import java.util.Optional;
 
 
@@ -15,13 +18,15 @@ public class GetAndSaveMovieInfoUseCaseImpl implements GetAndSaveMovieInfoUseCas
     private final MovieDetailsAdapter movieDetailsAdapter;
     private final MovieRepositoryPort movieRepository;
     private final ModelMapper modelMapper;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     public GetAndSaveMovieInfoUseCaseImpl(
-            MovieDetailsAdapter movieDetailsAdapter, MovieRepositoryPort movieRepository, ModelMapper modelMapper
-    ) {
+            MovieDetailsAdapter movieDetailsAdapter, MovieRepositoryPort movieRepository, ModelMapper modelMapper, RedisTemplate<String, Object> redisTemplate
+            ) {
         this.movieDetailsAdapter = movieDetailsAdapter;
         this.movieRepository = movieRepository;
         this.modelMapper = modelMapper;
+        this.redisTemplate = redisTemplate;
     }
 
     @Override
@@ -33,8 +38,35 @@ public class GetAndSaveMovieInfoUseCaseImpl implements GetAndSaveMovieInfoUseCas
 
     @Override
     public MovieInfoDTO getMovieById(long movieId) {
-        Optional<Movie> movie = movieRepository.getMovieById(movieId);
-        return modelMapper.map(movie, MovieInfoDTO.class);
+        MovieInfoDTO movieInfoDTO = getMovieFromCache(movieId);
+        if (movieInfoDTO == null) {
+            System.out.println("Película no encontrada en caché. Buscando en la base de datos...");
+            movieInfoDTO = getMovieFromDatabase(movieId);
+            storeMovieInCache(movieId, movieInfoDTO);
+        }
+        System.out.println("Película encontrada en caché.");
+        return movieInfoDTO;
+    }
+
+    private MovieInfoDTO getMovieFromCache(long movieId) {
+        System.out.println("Intentando obtener película desde la caché...");
+        return (MovieInfoDTO) redisTemplate.opsForValue().get("movie:" + movieId);
+    }
+
+    private void storeMovieInCache(long movieId, MovieInfoDTO movieInfoDTO) {
+        System.out.println("Guardando película en la caché...");
+        redisTemplate.opsForValue().set("movie:" + movieId, movieInfoDTO, Duration.ofMinutes(1));
+    }
+
+    private MovieInfoDTO getMovieFromDatabase(long movieId) {
+        Optional<Movie> optionalMovie = movieRepository.getMovieById(movieId);
+        if (optionalMovie.isPresent()) {
+            System.out.println("Película encontrada en la base de datos.");
+            return optionalMovie.map(movie -> modelMapper.map(optionalMovie, MovieInfoDTO.class)).orElse(null);
+        } else {
+            System.out.println("Película no encontrada en la base de datos.");
+            return null;
+        }
     }
 
 }
