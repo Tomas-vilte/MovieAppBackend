@@ -1,11 +1,11 @@
 package com.peliculas.peliculasapp.dto;
 import com.peliculas.peliculasapp.domain.models.*;
 import lombok.Data;
-
+import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class TvSeriesInfoDTO {
+public class TvSeriesInfoDTO implements Serializable {
     private String name;
     private String poster_path;
     private String original_name;

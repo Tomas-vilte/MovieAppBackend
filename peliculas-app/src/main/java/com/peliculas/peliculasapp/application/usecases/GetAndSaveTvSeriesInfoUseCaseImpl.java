@@ -8,6 +8,7 @@ import com.peliculas.peliculasapp.infrastructure.adapters.SeriesDetailsAdapter;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
+import java.time.Duration;
 import java.util.Optional;
 
 @Service
@@ -36,7 +37,34 @@ public class GetAndSaveTvSeriesInfoUseCaseImpl implements GetAndSaveTvSeriesInfo
 
     @Override
     public TvSeriesInfoDTO getTvSeriesInfoById(long tvSeriesId) {
-        Optional<TvSeries> tvSeriesEntity = tvSeriesRepositoryPort.getTvSeriesInfo(tvSeriesId);
-        return modelMapper.map(tvSeriesEntity, TvSeriesInfoDTO.class);
+       TvSeriesInfoDTO tvSeriesInfoDTO = getTvSeriesFromCache(tvSeriesId);
+       if (tvSeriesInfoDTO == null) {
+           System.out.println("Serie no encontrada en cache. Buscando en la base de datos");
+           tvSeriesInfoDTO = getTvSeriesFromDatabase(tvSeriesId);
+           storeTvSeriesInCache(tvSeriesId, tvSeriesInfoDTO);
+       }
+       System.out.println("Serie encontrada en cache");
+       return tvSeriesInfoDTO;
+    }
+
+    private TvSeriesInfoDTO getTvSeriesFromCache(long tvSeriesId) {
+        System.out.println("Intenando obtener series en la cache....");
+        return (TvSeriesInfoDTO) valueOperations.get("series:" + tvSeriesId);
+    }
+
+    private void storeTvSeriesInCache(long tvSeriesId, TvSeriesInfoDTO tvSeriesInfoDTO) {
+        System.out.println("Guardando Serie en Cache...");
+        valueOperations.set("series:" + tvSeriesId, tvSeriesInfoDTO, Duration.ofMinutes(1));
+    }
+
+    private TvSeriesInfoDTO getTvSeriesFromDatabase(long movieId) {
+        Optional<TvSeries> optionalTvSeries = tvSeriesRepositoryPort.getTvSeriesById(movieId);
+        if (optionalTvSeries.isPresent()) {
+            System.out.println("Serie encontrada en la base de datos.");
+            return optionalTvSeries.map(tvSeries -> modelMapper.map(optionalTvSeries, TvSeriesInfoDTO.class)).orElse(null);
+        } else {
+            System.out.println("Serie no encontrada en la base de datos.");
+            return null;
+        }
     }
 }
