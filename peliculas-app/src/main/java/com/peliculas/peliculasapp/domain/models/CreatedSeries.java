@@ -1,10 +1,14 @@
 package com.peliculas.peliculasapp.domain.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-public class CreatedSeries {
+@NoArgsConstructor
+public class CreatedSeries implements Serializable {
 
     private String name;
 

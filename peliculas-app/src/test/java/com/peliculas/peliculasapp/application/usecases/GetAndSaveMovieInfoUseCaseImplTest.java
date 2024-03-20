@@ -48,7 +48,8 @@ class GetAndSaveMovieInfoUseCaseImplTest {
                 valueOperations
         );
     }
-    @Test void testGetMovieByIdFromCache() {
+    @Test
+    void testGetMovieByIdFromCache() {
         // Arrange
         long movieId = 1011985;
         MovieInfoDTO expectedMovieInfoDTO = createSampleMovieInfoDTO();

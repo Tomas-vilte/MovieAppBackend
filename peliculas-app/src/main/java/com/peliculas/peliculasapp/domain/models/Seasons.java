@@ -1,10 +1,14 @@
 package com.peliculas.peliculasapp.domain.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-public class Seasons {
+@NoArgsConstructor
+public class Seasons implements Serializable {
     private String air_date;
 
     private int episode_count;

@@ -50,12 +50,12 @@ public class GetAndSaveMovieInfoUseCaseImpl implements GetAndSaveMovieInfoUseCas
 
     private MovieInfoDTO getMovieFromCache(long movieId) {
         System.out.println("Intentando obtener película desde la caché...");
-        return (MovieInfoDTO) valueOperations.get("movie:" + movieId); // Utiliza valueOperations aquí
+        return (MovieInfoDTO) valueOperations.get("movie:" + movieId);
     }
 
     private void storeMovieInCache(long movieId, MovieInfoDTO movieInfoDTO) {
         System.out.println("Guardando película en la caché...");
-        valueOperations.set("movie:" + movieId, movieInfoDTO, Duration.ofMinutes(1)); // Utiliza valueOperations aquí
+        valueOperations.set("movie:" + movieId, movieInfoDTO, Duration.ofMinutes(1));
     }
 
     private MovieInfoDTO getMovieFromDatabase(long movieId) {

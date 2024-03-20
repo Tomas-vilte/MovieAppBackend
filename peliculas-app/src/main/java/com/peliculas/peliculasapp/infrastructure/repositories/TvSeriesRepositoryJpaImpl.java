@@ -33,6 +33,12 @@ public class TvSeriesRepositoryJpaImpl implements TvSeriesRepositoryPort {
     @Override
     public Optional<TvSeries> getTvSeriesInfo(long tvSeriesId) {
         Optional<TvSeriesEntity> tvSeriesEntity = tvSeriesRepositoryJpa.findById(tvSeriesId);
-        return tvSeriesEntity.orElseThrow(() -> new TvSeriesNotFoundException("Serie con encontrada con el ID: " + tvSeriesId)).toDomainModel();
+        return tvSeriesEntity.orElseThrow(() -> new TvSeriesNotFoundException("Serie no encontrada con el ID: " + tvSeriesId)).toDomainModel();
+    }
+
+    @Override
+    public Optional<TvSeries> getTvSeriesById(long tvSeriesId) {
+        Optional<TvSeriesEntity> tvSeries = tvSeriesRepositoryJpa.findById(tvSeriesId);
+        return tvSeries.orElseThrow(() -> new TvSeriesNotFoundException("Serie no encontrada con el ID: " + tvSeriesId)).toDomainModel();
     }
 }
