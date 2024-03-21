@@ -7,100 +7,22 @@ import java.sql.Timestamp;
 public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "review_id")
-    private int id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "content_id")
-    private ContentEntity content;
+    @JoinColumn(name = "movie_id")
+    private MovieEntity movie;
 
-    @Column(name = "rating")
-    private float rating;
+    @ManyToOne
+    @JoinColumn(name = "series_id")
+    private TvSeriesEntity series;
 
-    @Column(name = "comment")
-    private String comment;
-
-    @Column(name = "created_at")
+    private String reviewText;
+    private int rating;
     private Timestamp createdAt;
-
-    @Column(name = "updated_at")
     private Timestamp updatedAt;
-
-    // Constructor privado para evitar la creacion directa de instancias
-    private ReviewEntity() {}
-
-    // Getters
-    public int getId() {
-        return id;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public ContentEntity getContent() {
-        return content;
-    }
-
-    public float getRating() {
-        return rating;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public static class Builder {
-        private final ReviewEntity review;
-
-        public Builder() {
-            this.review = new ReviewEntity();
-        }
-
-        public Builder setUser(UserEntity user) {
-            this.review.user = user;
-            return this;
-        }
-
-        public Builder setContent(ContentEntity content) {
-            this.review.content = content;
-            return this;
-        }
-
-        public Builder setRating(float rating) {
-            this.review.rating = rating;
-            return this;
-        }
-
-        public Builder setComment(String comment) {
-            this.review.comment = comment;
-            return this;
-        }
-
-        public Builder setCreatedAt(Timestamp createdAt) {
-            this.review.createdAt = createdAt;
-            return this;
-        }
-
-        public Builder setUpdatedAt(Timestamp updatedAt) {
-            this.review.updatedAt = updatedAt;
-            return this;
-        }
-
-        public ReviewEntity build() {
-            return this.review;
-        }
-    }
 }

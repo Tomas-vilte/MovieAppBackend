@@ -8,11 +8,11 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReviewDTO {
-    int review_id;
-    float rating;
-    String comment;
-    String username;
-    String title;
-    Timestamp created_at;
-    Timestamp updated_at;
+    private long review_id;
+    private float rating;
+    private String comment;
+    private String username;
+    private String title;
+    private String created_at;
+    private String updated_at;
 }
