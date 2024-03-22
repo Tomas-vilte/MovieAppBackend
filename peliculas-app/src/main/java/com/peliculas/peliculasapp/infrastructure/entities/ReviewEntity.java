@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "review_id")
     private int id;
 
     @ManyToOne
@@ -21,7 +20,6 @@ public class ReviewEntity {
     @ManyToOne
     @JoinColumn(name = "series_id")
     private TvSeriesEntity series;
-
     private String reviewText;
     private int rating;
     private Timestamp createdAt;
