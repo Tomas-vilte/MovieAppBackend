@@ -1,17 +1,13 @@
 package com.peliculas.peliculasapp.infrastructure.controllers;
-
-
-import com.peliculas.peliculasapp.infrastructure.entities.UserEntity;
+import com.peliculas.peliculasapp.domain.models.User;
+import com.peliculas.peliculasapp.dto.UserDTO;
 import com.peliculas.peliculasapp.application.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api")
 public class UserController {
 
     private final UserService userService;
@@ -21,8 +17,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<UserEntity> getAllUsers() {
-        return userService.getAllUsers();
+    @GetMapping("/user/{userId}")
+    public Optional<UserDTO> findUserById(@PathVariable long userId) {
+        return userService.findUserById(userId);
+    }
+
+    @PostMapping("/users")
+    public void saveUser(@RequestBody User user) {
+        userService.saveUser(user);
     }
 }

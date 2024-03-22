@@ -2,7 +2,12 @@ package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user")
@@ -14,22 +19,28 @@ public class UserEntity {
     @Column(name = "user_id")
     private long id;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username")
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "created_at", updatable = false, nullable = false)
-    private Timestamp createdAt;
+    @Column(name = "created_at", updatable = false)
+    @CreatedDate
+    private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false)
-    private Timestamp updatedAt;
+    @Column(name = "updated_at")
+    private Date updatedAt;
 
     public UserEntity(long id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.createdAt = LocalDateTime.now();
     }
 }
 

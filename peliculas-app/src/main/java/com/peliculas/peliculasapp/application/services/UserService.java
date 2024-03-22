@@ -1,22 +1,26 @@
 package com.peliculas.peliculasapp.application.services;
-import com.peliculas.peliculasapp.infrastructure.entities.UserEntity;
-import com.peliculas.peliculasapp.infrastructure.repositories.UserRepository;
+import com.peliculas.peliculasapp.application.ports.in.UserCaseUse;
+import com.peliculas.peliculasapp.domain.models.User;
+import com.peliculas.peliculasapp.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+    private final UserCaseUse userCaseUse;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(UserCaseUse userCaseUse) {
+        this.userCaseUse = userCaseUse;
     }
 
-    public List<UserEntity> getAllUsers() {
-        return userRepository.findAll();
+    public Optional<UserDTO> findUserById(long userId) {
+        return userCaseUse.findUserById(userId);
+    }
+
+    public void saveUser(User user) {
+        userCaseUse.saveUser(user);
     }
 
 }
