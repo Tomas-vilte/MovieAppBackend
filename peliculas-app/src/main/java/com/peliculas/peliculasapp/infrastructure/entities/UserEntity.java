@@ -2,11 +2,10 @@ package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -33,7 +32,8 @@ public class UserEntity {
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private Date updatedAt;
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
     public UserEntity() {}
 

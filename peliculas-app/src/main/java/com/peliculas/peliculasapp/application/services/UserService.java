@@ -27,4 +27,8 @@ public class UserService {
         userCaseUse.deleteUser(userId);
     }
 
+    public Optional<User> updateUser(User user) {
+        return userCaseUse.updateUser(user);
+    }
+
 }

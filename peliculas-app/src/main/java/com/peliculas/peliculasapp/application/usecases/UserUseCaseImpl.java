@@ -40,7 +40,7 @@ public class UserUseCaseImpl implements UserCaseUse {
     }
 
     @Override
-    public void updateUser(User user) {
-        userRepositoryPort.updateUser(user);
+    public Optional<User> updateUser(User user) {
+        return userRepositoryPort.updateUser(user);
     }
 }

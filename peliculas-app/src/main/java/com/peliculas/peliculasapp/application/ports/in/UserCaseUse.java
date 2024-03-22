@@ -7,5 +7,5 @@ public interface UserCaseUse {
     void saveUser(User user);
     Optional<UserDTO> findUserById(long userId);
     void deleteUser(long userId);
-    void updateUser(User user);
+    Optional<User> updateUser(User user);
 }

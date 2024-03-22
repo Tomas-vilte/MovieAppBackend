@@ -7,6 +7,9 @@ import com.peliculas.peliculasapp.infrastructure.exceptions.EmailAlreadyExistsEx
 import com.peliculas.peliculasapp.infrastructure.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
@@ -61,6 +64,7 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
     private void updateUserFields(User source, UserEntity target) {
         target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());
+        target.setUpdatedAt(LocalDateTime.now());
 
         if (source.getPassword() != null && !source.getPassword().isEmpty()) {
             target.setPassword(source.getPassword());
