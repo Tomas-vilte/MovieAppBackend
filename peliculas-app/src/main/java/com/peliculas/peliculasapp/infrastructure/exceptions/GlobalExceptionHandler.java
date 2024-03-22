@@ -32,4 +32,16 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handlerUserNotFoundException(UserNotFoundException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Usuario no encontrado", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handlerEmailAlreadyException(EmailAlreadyExistsException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.CONFLICT.value(), "Este email ya esta registrado", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(errorResponse);
+    }
+
 }

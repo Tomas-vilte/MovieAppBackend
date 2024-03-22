@@ -5,14 +5,14 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class SuccessResponse implements Serializable {
+public class SuccessResponseUser implements Serializable {
     private int status;
     private String message;
-    private Object movie;
+    private Object data;
 
-    public SuccessResponse(int status, String message, Object movie) {
+    public SuccessResponseUser(int status, String message, Object data) {
         this.status = status;
         this.message = message;
-        this.movie = movie;
+        this.data = data;
     }
 }
