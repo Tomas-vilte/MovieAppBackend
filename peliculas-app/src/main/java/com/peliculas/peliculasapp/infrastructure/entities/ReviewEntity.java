@@ -7,7 +7,8 @@ import java.sql.Timestamp;
 public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "review_id")
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

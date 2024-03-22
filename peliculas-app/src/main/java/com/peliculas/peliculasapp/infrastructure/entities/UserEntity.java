@@ -1,9 +1,13 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "user")
+@Setter
+@Getter
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +28,8 @@ public class UserEntity {
 
     @Column(name = "updated_at", nullable = false)
     private Timestamp updatedAt;
+
+    public UserEntity(long id, String username, String email, String password) {
+    }
 }
 

@@ -1,9 +1,7 @@
 package com.peliculas.peliculasapp.application.services;
-
 import com.peliculas.peliculasapp.dto.ReviewDTO;
 import com.peliculas.peliculasapp.infrastructure.repositories.ReviewRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +16,12 @@ public class ReviewService {
 
 
     public Optional<ReviewDTO> getReviewsByContentId(int contentId) {
-        return reviewRepository.findReviewById(contentId);
+        // TODO: add function
+        return null;
     }
 
     public List<ReviewDTO> getAllReviews() {
-        return reviewRepository.findAllReviews();
+        // TODO: add function
+        return null;
     }
 }
