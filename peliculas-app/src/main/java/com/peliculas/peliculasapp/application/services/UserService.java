@@ -23,4 +23,8 @@ public class UserService {
         userCaseUse.saveUser(user);
     }
 
+    public void deleteUser(long userId) {
+        userCaseUse.deleteUser(userId);
+    }
+
 }

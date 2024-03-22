@@ -35,6 +35,8 @@ public class UserEntity {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    public UserEntity() {}
+
     public UserEntity(long id, String username, String email, String password) {
         this.id = id;
         this.username = username;

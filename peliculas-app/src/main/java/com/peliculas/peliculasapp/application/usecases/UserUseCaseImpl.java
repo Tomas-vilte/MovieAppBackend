@@ -35,8 +35,8 @@ public class UserUseCaseImpl implements UserCaseUse {
     }
 
     @Override
-    public void deleteUser(User user) {
-        userRepositoryPort.deleteUser(user);
+    public void deleteUser(long userId) {
+        userRepositoryPort.deleteUser(userId);
     }
 
     @Override

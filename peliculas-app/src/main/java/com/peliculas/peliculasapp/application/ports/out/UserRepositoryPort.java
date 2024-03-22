@@ -7,6 +7,6 @@ import java.util.Optional;
 public interface UserRepositoryPort {
     Optional<User> saveUser(User user);
     Optional<User> findUserByID(long userId);
-    void deleteUser(User user);
+    void deleteUser(long userId);
     Optional<User> updateUser(User user);
 }

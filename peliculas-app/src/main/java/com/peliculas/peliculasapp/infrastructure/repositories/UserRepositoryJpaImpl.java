@@ -40,11 +40,11 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
 
     @Override
     @Transactional(readOnly = false)
-    public void deleteUser(User user) {
-        Optional<UserEntity> existingUser = userRepository.findById(user.getId());
+    public void deleteUser(long userId) {
+        Optional<UserEntity> existingUser = userRepository.findById(userId);
         existingUser.ifPresentOrElse(
                 userRepository::delete,
-                () -> {throw new UserNotFoundException("No se encontró el usuario con ID: " + user.getId());
+                () -> { throw new UserNotFoundException("No se encontró el usuario con ID: " + userId);
                 }
         );
     }
