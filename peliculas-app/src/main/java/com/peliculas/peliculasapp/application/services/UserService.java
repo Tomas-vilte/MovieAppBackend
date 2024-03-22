@@ -19,8 +19,16 @@ public class UserService {
         return userCaseUse.findUserById(userId);
     }
 
-    public void saveUser(User user) {
-        userCaseUse.saveUser(user);
+    public Optional<UserDTO> saveUser(User user) {
+        return userCaseUse.saveUser(user);
+    }
+
+    public Optional<UserDTO> deleteUser(long userId) {
+       return userCaseUse.deleteUser(userId);
+    }
+
+    public Optional<UserDTO> updateUser(User user) {
+        return userCaseUse.updateUser(user);
     }
 
 }

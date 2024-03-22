@@ -7,6 +7,7 @@ import com.peliculas.peliculasapp.infrastructure.exceptions.EmailAlreadyExistsEx
 import com.peliculas.peliculasapp.infrastructure.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
@@ -40,13 +41,12 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
 
     @Override
     @Transactional(readOnly = false)
-    public void deleteUser(User user) {
-        Optional<UserEntity> existingUser = userRepository.findById(user.getId());
-        existingUser.ifPresentOrElse(
-                userRepository::delete,
-                () -> {throw new UserNotFoundException("No se encontró el usuario con ID: " + user.getId());
-                }
-        );
+    public Optional<User> deleteUser(long userId) {
+        Optional<UserEntity> existingUser = userRepository.findById(userId);
+        return existingUser.map(userEntity -> {
+            userRepository.delete(userEntity);
+            return userMapper.toDomainModel(userEntity);
+        }).or(Optional::empty);
     }
 
     @Override
@@ -61,6 +61,7 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
     private void updateUserFields(User source, UserEntity target) {
         target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());
+        target.setUpdatedAt(LocalDateTime.now());
 
         if (source.getPassword() != null && !source.getPassword().isEmpty()) {
             target.setPassword(source.getPassword());

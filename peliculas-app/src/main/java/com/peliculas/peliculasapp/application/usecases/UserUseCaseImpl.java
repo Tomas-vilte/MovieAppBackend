@@ -23,9 +23,9 @@ public class UserUseCaseImpl implements UserCaseUse {
         this.valueOperations = valueOperations;
     }
     @Override
-    public void saveUser(User user) {
-        User userMapper = modelMapper.map(user, User.class);
-        userRepositoryPort.saveUser(userMapper);
+    public Optional<UserDTO> saveUser(User user) {
+        Optional<User> saveUser = userRepositoryPort.saveUser(user);
+        return Optional.of(modelMapper.map(saveUser, UserDTO.class));
     }
 
     @Override
@@ -35,12 +35,14 @@ public class UserUseCaseImpl implements UserCaseUse {
     }
 
     @Override
-    public void deleteUser(User user) {
-        userRepositoryPort.deleteUser(user);
+    public Optional<UserDTO> deleteUser(long userId) {
+        Optional<User> deleteUser = userRepositoryPort.deleteUser(userId);
+        return Optional.of(modelMapper.map(deleteUser, UserDTO.class));
     }
 
     @Override
-    public void updateUser(User user) {
-        userRepositoryPort.updateUser(user);
+    public Optional<UserDTO> updateUser(User user) {
+        Optional<User> updateUser = userRepositoryPort.updateUser(user);
+        return Optional.of(modelMapper.map(updateUser, UserDTO.class));
     }
 }
