@@ -20,7 +20,7 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public Optional<User> saveUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new EmailAlreadyExistsException("Ya existe un usuario con el correo electrónico proporcionado: " + user.getEmail());
@@ -31,15 +31,15 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Optional<User> findUserByID(long userId) {
-        return Optional.ofNullable(userRepository.findById(userId)
+        return Optional.of(userRepository.findById(userId)
                 .map(userMapper::toDomainModel)
                 .orElseThrow(() -> new UserNotFoundException("Usuario no encontrado con este ID: " + userId)));
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public void deleteUser(User user) {
         Optional<UserEntity> existingUser = userRepository.findById(user.getId());
         existingUser.ifPresentOrElse(
@@ -50,7 +50,7 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public Optional<User> updateUser(User user) {
         Optional<UserEntity> existingUserOptional = userRepository.findById(user.getId());
         return Optional.of(existingUserOptional.map(existingUser -> {
