@@ -1,16 +1,18 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
-
+import lombok.Getter;
+import lombok.Setter;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
 @Table(name = "user")
+@Setter
+@Getter
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private long id;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -27,78 +29,7 @@ public class UserEntity {
     @Column(name = "updated_at", nullable = false)
     private Timestamp updatedAt;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<ReviewEntity> reviews;
-
-    // Constructor privado para builder
-    public UserEntity() {}
-
-    // Getters
-    public int getUserId() {
-        return userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    // Clase builder
-    public static class Builder {
-        private UserEntity user;
-
-        public Builder() {
-            this.user = new UserEntity();
-        }
-
-        public Builder setUser_id(int user_id) {
-            this.user.userId = user_id;
-            return this;
-        }
-
-        public Builder setUsername(String username) {
-            this.user.username = username;
-            return this;
-        }
-
-        public Builder setPassword(String password) {
-            this.user.password = password;
-            return this;
-        }
-
-        public Builder setEmail(String email) {
-            this.user.email = email;
-            return this;
-        }
-
-        public Builder setCreatedAt(Timestamp created_at) {
-            this.user.createdAt = created_at;
-            return this;
-        }
-
-        public Builder setUpdateAt(Timestamp update_at) {
-            this.user.updatedAt = update_at;
-            return this;
-        }
-
-        public UserEntity build() {
-            return this.user;
-        }
+    public UserEntity(long id, String username, String email, String password) {
     }
 }
 
