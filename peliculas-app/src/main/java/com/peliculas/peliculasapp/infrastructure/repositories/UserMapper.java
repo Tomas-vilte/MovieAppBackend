@@ -1,12 +1,12 @@
 package com.peliculas.peliculasapp.infrastructure.repositories;
-import com.peliculas.peliculasapp.application.ports.incoming.UserMapper;
+import com.peliculas.peliculasapp.application.ports.incoming.EntityMapper;
 import com.peliculas.peliculasapp.domain.models.User;
 import com.peliculas.peliculasapp.infrastructure.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapperImpl implements UserMapper {
-    public UserMapperImpl() {}
+public class UserMapper implements EntityMapper<UserEntity, User> {
+    public UserMapper() {}
 
     @Override
     public User toDomainModel(UserEntity userEntity) {
