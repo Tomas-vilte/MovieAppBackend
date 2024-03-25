@@ -1,11 +1,15 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "movie_review")
+@Setter
+@Getter
 public class MovieReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +25,7 @@ public class MovieReviewEntity {
 
     @Column(name = "review_text")
     private String reviewText;
+    @Column(name = "rating")
     private int rating;
     @Column(name = "created_at")
     @CreatedDate
@@ -29,4 +34,16 @@ public class MovieReviewEntity {
     @Column(name = "updated_at")
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    public MovieReviewEntity() {}
+
+    public MovieReviewEntity(long id, MovieEntity movie, UserEntity user, String reviewText, int rating, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.movie = movie;
+        this.user = user;
+        this.reviewText = reviewText;
+        this.rating = rating;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }
