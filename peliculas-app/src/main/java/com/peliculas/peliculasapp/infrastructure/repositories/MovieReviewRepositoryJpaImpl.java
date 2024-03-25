@@ -9,18 +9,19 @@ import java.util.Optional;
 @Repository
 public class MovieReviewRepositoryJpaImpl implements MovieReviewRepositoryPort {
     private final MovieReviewRepository movieReviewRepository;
+    private final MovieReviewMapper movieReviewMapper;
 
     @Autowired
-    public MovieReviewRepositoryJpaImpl(MovieReviewRepository movieReviewRepository)  {
+    public MovieReviewRepositoryJpaImpl(MovieReviewRepository movieReviewRepository, MovieReviewMapper movieReviewMapper)  {
         this.movieReviewRepository = movieReviewRepository;
+        this.movieReviewMapper = movieReviewMapper;
     }
 
     @Override
     public Optional<MovieReview> createMovieReview(MovieReview movieReview) {
-        // TODO: Implement
-        Optional<MovieReviewEntity> existingMovie = movieReviewRepository.findById(movieReview.getId());
-
-        return Optional.empty();
+        MovieReviewEntity movieReviewEntity = movieReviewMapper.toEntity(movieReview);
+        MovieReviewEntity saveEntity = movieReviewRepository.save(movieReviewEntity);
+        return Optional.of(movieReviewMapper.toDomainModel(saveEntity));
     }
 
     @Override
