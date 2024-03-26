@@ -37,13 +37,11 @@ public class MovieReviewEntity {
 
     public MovieReviewEntity() {}
 
-    public MovieReviewEntity(long id, MovieEntity movie, UserEntity user, String reviewText, int rating, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
+    public MovieReviewEntity(MovieEntity movie, UserEntity user, String reviewText, int rating) {
         this.movie = movie;
         this.user = user;
         this.reviewText = reviewText;
         this.rating = rating;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = LocalDateTime.now();
     }
 }
