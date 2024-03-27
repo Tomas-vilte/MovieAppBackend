@@ -4,11 +4,16 @@ import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.domain.models.ProductionCompany;
 import com.peliculas.peliculasapp.domain.models.ProductionCountries;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Entity
+@Setter
+@Getter
 public class MovieEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
