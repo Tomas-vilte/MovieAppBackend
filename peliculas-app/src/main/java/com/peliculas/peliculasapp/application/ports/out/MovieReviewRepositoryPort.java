@@ -1,5 +1,7 @@
 package com.peliculas.peliculasapp.application.ports.out;
 import com.peliculas.peliculasapp.domain.models.MovieReview;
+import com.peliculas.peliculasapp.dto.MovieReviewDTO;
+
 import java.util.Optional;
 
 public interface MovieReviewRepositoryPort {

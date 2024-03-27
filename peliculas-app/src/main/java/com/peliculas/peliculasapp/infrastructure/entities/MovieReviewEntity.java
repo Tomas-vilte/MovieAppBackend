@@ -1,12 +1,16 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "movie_review")
 @Setter
 @Getter
@@ -35,13 +39,4 @@ public class MovieReviewEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public MovieReviewEntity() {}
-
-    public MovieReviewEntity(MovieEntity movie, UserEntity user, String reviewText, int rating) {
-        this.movie = movie;
-        this.user = user;
-        this.reviewText = reviewText;
-        this.rating = rating;
-        this.createdAt = LocalDateTime.now();
-    }
 }
