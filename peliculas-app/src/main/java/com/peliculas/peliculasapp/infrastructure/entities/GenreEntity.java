@@ -1,8 +1,11 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-import com.peliculas.peliculasapp.domain.models.Genre;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class GenreEntity {
 
     @Id
@@ -15,16 +18,5 @@ public class GenreEntity {
 
     public GenreEntity(String name) {
         this.name = name;
-    }
-
-    public static GenreEntity fromDomainModel(Genre genre) {
-        return new GenreEntity(
-                genre.getName()
-        );
-    }
-    public Genre toDomainModel() {
-        return new Genre(
-                name
-        );
     }
 }

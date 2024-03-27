@@ -1,5 +1,4 @@
 package com.peliculas.peliculasapp.infrastructure.mapper;
-import com.peliculas.peliculasapp.application.ports.incoming.EntityMapper;
 import com.peliculas.peliculasapp.domain.models.Genre;
 import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.domain.models.ProductionCompany;
@@ -8,72 +7,67 @@ import com.peliculas.peliculasapp.infrastructure.entities.GenreEntity;
 import com.peliculas.peliculasapp.infrastructure.entities.MovieEntity;
 import com.peliculas.peliculasapp.infrastructure.entities.ProductionCompaniesEntity;
 import com.peliculas.peliculasapp.infrastructure.entities.ProductionCountriesEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class MovieEntityMapper implements EntityMapper<MovieEntity, Movie> {
+public class MovieEntityMapper {
+    private final ProductionCountriesEntityMapper productionCountriesEntityMapper;
+    private final ProductionCompaniesEntityMapper productionCompaniesEntityMapper;
+    private final GenreEntityMapper genreEntityMapper;
 
-    @Override
-    public Movie toDomainModel(MovieEntity entity) {
-        List<ProductionCountries> productionCountries = entity.getProductionCountries().stream()
-                .map(ProductionCountriesEntity::toDomainModel)
-                .toList();
+    @Autowired
+    public MovieEntityMapper(ProductionCountriesEntityMapper productionCountriesEntityMapper, ProductionCompaniesEntityMapper productionCompaniesEntityMapper, GenreEntityMapper genreEntityMapper) {
+        this.productionCountriesEntityMapper = productionCountriesEntityMapper;
+        this.productionCompaniesEntityMapper = productionCompaniesEntityMapper;
+        this.genreEntityMapper = genreEntityMapper;
+    }
 
-        List<ProductionCompany> productionCompanies = entity.getProductionCompanies().stream()
-                .map(ProductionCompaniesEntity::toDomainModel)
-                .toList();
+    public MovieEntity fromDomainModel(Movie movie) {
+        List<ProductionCountriesEntity> productionCountriesEntities = productionCountriesEntityMapper.fromDomainModel(movie.getProduction_countries());
+        List<ProductionCompaniesEntity> productionCompaniesEntities = productionCompaniesEntityMapper.fromDomainModel(movie.getProduction_companies());
+        List<GenreEntity> genreEntities = genreEntityMapper.fromDomainModel(movie.getGenres());
 
-        List<Genre> genres = entity.getGenres().stream()
-                .map(GenreEntity::toDomainModel)
-                .toList();
-        return new Movie(
-                entity.getMovieId(),
-                entity.getOverview(),
-                entity.getStatus(),
-                productionCompanies,
-                genres,
-                productionCountries,
-                entity.getTitle(),
-                entity.getVoteAverage(),
-                entity.getVoteCount(),
-                entity.getRevenue(),
-                entity.getBudget(),
-                entity.getPopularity(),
-                entity.getPosterPath(),
-                entity.getReleaseDate()
+        return new MovieEntity(
+                movie.getId(),
+                movie.getOverview(),
+                movie.getStatus(),
+                productionCompaniesEntities,
+                genreEntities,
+                productionCountriesEntities,
+                movie.getTitle(),
+                movie.getVote_average(),
+                movie.getVote_count(),
+                movie.getRevenue(),
+                movie.getBudget(),
+                movie.getPopularity(),
+                movie.getPoster_path(),
+                movie.getRelease_date()
         );
     }
 
-    @Override
-    public MovieEntity toEntity(Movie model) {
-        List<ProductionCountriesEntity> productionCountriesEntities = model.getProduction_countries().stream()
-                .map(ProductionCountriesEntity::fromDomainModel)
-                .toList();
+    public Movie toDomainModel(MovieEntity movieEntity) {
+        List<ProductionCountries> productionCountries = productionCountriesEntityMapper.toDomainModel(movieEntity.getProductionCountries());
+        List<ProductionCompany> productionCompanies = productionCompaniesEntityMapper.toDomainModel(movieEntity.getProductionCompanies());
+        List<Genre> genres = genreEntityMapper.toDomainModel(movieEntity.getGenres());
 
-        List<ProductionCompaniesEntity> productionCompanyEntities = model.getProduction_companies().stream()
-                .map(ProductionCompaniesEntity::fromDomainModel)
-                .toList();
 
-        List<GenreEntity> genreEntities = model.getGenres().stream()
-                .map(GenreEntity::fromDomainModel)
-                .toList();
-
-        return new MovieEntity(
-                model.getId(),
-                model.getOverview(),
-                model.getStatus(),
-                productionCompanyEntities,
-                genreEntities,
-                productionCountriesEntities,
-                model.getTitle(),
-                model.getVote_average(),
-                model.getVote_count(),
-                model.getRevenue(),
-                model.getBudget(),
-                model.getPopularity(),
-                model.getPoster_path(),
-                model.getRelease_date()
+        return new Movie(
+                movieEntity.getId(),
+                movieEntity.getOverview(),
+                movieEntity.getStatus(),
+                productionCompanies,
+                genres,
+                productionCountries,
+                movieEntity.getTitle(),
+                movieEntity.getVoteAverage(),
+                movieEntity.getVoteCount(),
+                movieEntity.getRevenue(),
+                movieEntity.getBudget(),
+                movieEntity.getPopularity(),
+                movieEntity.getPosterPath(),
+                movieEntity.getReleaseDate()
         );
     }
 }
