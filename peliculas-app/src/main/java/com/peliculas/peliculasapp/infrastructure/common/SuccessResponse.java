@@ -8,11 +8,11 @@ import java.io.Serializable;
 public class SuccessResponse implements Serializable {
     private int status;
     private String message;
-    private Object movie;
+    private Object data;
 
-    public SuccessResponse(int status, String message, Object movie) {
+    public SuccessResponse(int status, String message, Object data) {
         this.status = status;
         this.message = message;
-        this.movie = movie;
+        this.data = data;
     }
 }

@@ -4,6 +4,7 @@ import com.peliculas.peliculasapp.domain.models.User;
 import com.peliculas.peliculasapp.infrastructure.entities.UserEntity;
 import com.peliculas.peliculasapp.infrastructure.exceptions.EmailAlreadyExistsException;
 import com.peliculas.peliculasapp.infrastructure.exceptions.UserNotFoundException;
+import com.peliculas.peliculasapp.infrastructure.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;

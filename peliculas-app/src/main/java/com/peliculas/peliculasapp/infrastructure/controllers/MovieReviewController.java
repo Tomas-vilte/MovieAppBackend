@@ -2,6 +2,7 @@ package com.peliculas.peliculasapp.infrastructure.controllers;
 import com.peliculas.peliculasapp.application.services.MovieReviewService;
 import com.peliculas.peliculasapp.domain.models.MovieReview;
 import com.peliculas.peliculasapp.dto.MovieReviewDTO;
+import com.peliculas.peliculasapp.infrastructure.common.SuccessResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,9 @@ public class MovieReviewController {
     }
 
     @PostMapping("/movies/create")
-    public ResponseEntity<MovieReviewDTO> createMovieReview(@RequestBody MovieReview movieReview) {
+    public ResponseEntity<?> createMovieReview(@RequestBody MovieReview movieReview) {
         Optional<MovieReviewDTO> createdReview = movieReviewService.createMovieReview(movieReview);
-        return createdReview.map(movieReviewDTO -> new ResponseEntity<>(movieReviewDTO, HttpStatus.CREATED)).orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(), "Review de pelicula creada con exito", createdReview);
+        return ResponseEntity.ok(successResponse);
     }
 }

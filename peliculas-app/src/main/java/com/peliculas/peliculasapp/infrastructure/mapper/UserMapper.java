@@ -1,4 +1,4 @@
-package com.peliculas.peliculasapp.infrastructure.repositories;
+package com.peliculas.peliculasapp.infrastructure.mapper;
 import com.peliculas.peliculasapp.application.ports.incoming.EntityMapper;
 import com.peliculas.peliculasapp.domain.models.User;
 import com.peliculas.peliculasapp.infrastructure.entities.UserEntity;
