@@ -1,15 +1,8 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-import com.peliculas.peliculasapp.domain.models.Genre;
-import com.peliculas.peliculasapp.domain.models.Movie;
-import com.peliculas.peliculasapp.domain.models.ProductionCompany;
-import com.peliculas.peliculasapp.domain.models.ProductionCountries;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Entity
 @Setter
@@ -70,67 +63,5 @@ public class MovieEntity {
         this.popularity = popularity;
         this.posterPath = posterPath;
         this.releaseDate = releaseDate;
-    }
-
-    public static MovieEntity fromDomainModel(Movie movie) {
-        List<ProductionCountriesEntity> productionCountriesEntities = movie.getProduction_countries().stream()
-                .map(ProductionCountriesEntity::fromDomainModel)
-                .toList();
-
-        List<ProductionCompaniesEntity> productionCompanyEntities = movie.getProduction_companies().stream()
-                .map(ProductionCompaniesEntity::fromDomainModel)
-                .toList();
-
-        List<GenreEntity> genreEntities = movie.getGenres().stream()
-                .map(GenreEntity::fromDomainModel)
-                .toList();
-
-        return new MovieEntity(
-                movie.getId(),
-                movie.getOverview(),
-                movie.getStatus(),
-                productionCompanyEntities,
-                genreEntities,
-                productionCountriesEntities,
-                movie.getTitle(),
-                movie.getVote_average(),
-                movie.getVote_count(),
-                movie.getRevenue(),
-                movie.getBudget(),
-                movie.getPopularity(),
-                movie.getPoster_path(),
-                movie.getRelease_date()
-        );
-    }
-
-    public Optional<Movie> toDomainModel() {
-        List<ProductionCountries> productionCountries = this.productionCountries.stream()
-                .map(ProductionCountriesEntity::toDomainModel)
-                .collect(Collectors.toList());
-
-        List<ProductionCompany> productionCompanies = this.productionCompanies.stream()
-                .map(ProductionCompaniesEntity::toDomainModel)
-                .collect(Collectors.toList());
-
-        List<Genre> genreList = this.genres.stream()
-                .map(GenreEntity::toDomainModel)
-                .collect(Collectors.toList());
-
-        return Optional.of(new Movie(
-                movieId,
-                overview,
-                status,
-                productionCompanies,
-                genreList,
-                productionCountries,
-                title,
-                voteAverage,
-                voteCount,
-                revenue,
-                budget,
-                popularity,
-                posterPath,
-                releaseDate
-        ));
     }
 }

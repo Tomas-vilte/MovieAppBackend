@@ -1,10 +1,14 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-import com.peliculas.peliculasapp.domain.models.ProductionCountries;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 public class ProductionCountriesEntity {
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,20 +21,4 @@ public class ProductionCountriesEntity {
          this.name = name;
          this.iso31661 = iso31661;
      }
-
-
-    public static ProductionCountriesEntity fromDomainModel(ProductionCountries productionCountries) {
-        return new ProductionCountriesEntity(
-                productionCountries.getName(),
-                productionCountries.getIso_3166_1()
-        );
-    }
-
-    public ProductionCountries toDomainModel() {
-        return new ProductionCountries(
-                name,
-                iso31661
-        );
-    }
-
 }
