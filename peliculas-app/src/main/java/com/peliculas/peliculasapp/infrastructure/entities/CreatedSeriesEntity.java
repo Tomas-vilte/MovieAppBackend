@@ -1,11 +1,14 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-import com.peliculas.peliculasapp.domain.models.CreatedSeries;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class CreatedSeriesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,21 +24,4 @@ public class CreatedSeriesEntity {
         this.gender = gender;
         this.profilePath = profilePath;
     }
-
-    public static CreatedSeriesEntity fromDomainModel(CreatedSeries createdSeries) {
-        return new CreatedSeriesEntity(
-                createdSeries.getName(),
-                createdSeries.getGender(),
-                createdSeries.getProfile_path()
-        );
-    }
-
-    public CreatedSeries toDomainModel() {
-        return new CreatedSeries(
-                name,
-                gender,
-                profilePath
-        );
-    }
-
 }
