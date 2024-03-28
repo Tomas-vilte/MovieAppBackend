@@ -5,4 +5,3 @@ public interface ListMapper<S, T>{
     List<T> fromDomainModel(List<S> sourceList);
     List<S> toDomainModel(List<T> sourceList);
 }
-
