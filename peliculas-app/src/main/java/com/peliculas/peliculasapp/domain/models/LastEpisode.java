@@ -21,6 +21,4 @@ public class LastEpisode implements Serializable {
     private int season_number;
     private int show_id;
     private String still_path;
-
-
 }
