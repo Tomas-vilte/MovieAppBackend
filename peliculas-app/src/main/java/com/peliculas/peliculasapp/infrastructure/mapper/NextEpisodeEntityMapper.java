@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 public class NextEpisodeEntityMapper implements DomainEntityMapper<NextEpisode, NextEpisodeEntity>{
     @Override
     public NextEpisodeEntity fromDomainModel(NextEpisode nextEpisode) {
+        if (nextEpisode == null) {
+            return null;
+        }
         return new NextEpisodeEntity(
                 nextEpisode.getName(),
                 nextEpisode.getOverview(),

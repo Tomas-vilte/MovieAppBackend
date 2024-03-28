@@ -45,6 +45,7 @@ public class TvSeriesEntity {
     private List<OriginCountryEntity> originCountry;
     private String originalLanguage;
     private String originalName;
+    @Column(length = 1000)
     private String overview;
     private float popularity;
     private String posterPath;
