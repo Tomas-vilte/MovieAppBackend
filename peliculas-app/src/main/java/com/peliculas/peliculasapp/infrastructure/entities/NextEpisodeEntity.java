@@ -1,11 +1,14 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-import com.peliculas.peliculasapp.domain.models.NextEpisode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class NextEpisodeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,40 +42,4 @@ public class NextEpisodeEntity {
         this.show_id = show_id;
         this.still_path = still_path;
     }
-
-    public NextEpisode toDomainModel() {
-        return new NextEpisode(
-                id,
-                name,
-                overview,
-                vote_average,
-                vote_count,
-                air_date,
-                episode_number,
-                episode_type,
-                production_code,
-                runtime,
-                season_number,
-                show_id,
-                still_path
-        );
-    }
-
-    public static NextEpisodeEntity fromDomainModel(NextEpisode nextEpisode) {
-        return new NextEpisodeEntity(
-                nextEpisode.getName(),
-                nextEpisode.getOverview(),
-                nextEpisode.getVote_average(),
-                nextEpisode.getVote_count(),
-                nextEpisode.getAir_date(),
-                nextEpisode.getEpisode_number(),
-                nextEpisode.getEpisode_type(),
-                nextEpisode.getProduction_code(),
-                nextEpisode.getRuntime(),
-                nextEpisode.getSeason_number(),
-                nextEpisode.getShow_id(),
-                nextEpisode.getStill_path()
-        );
-    }
-
 }
