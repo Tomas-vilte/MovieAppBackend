@@ -1,27 +1,22 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-import com.peliculas.peliculasapp.domain.models.Seasons;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class SeasonsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String airDate;
-
     private int episodeCount;
-
     private String name;
-
+    @Column(length = 1000)
     private String overview;
-
     private String posterPath;
-
     private int seasonNumber;
-
     private float voteAverage;
 
     public SeasonsEntity() {}
@@ -34,29 +29,5 @@ public class SeasonsEntity {
         this.posterPath = posterPath;
         this.seasonNumber = seasonNumber;
         this.voteAverage = voteAverage;
-    }
-
-    public Seasons toDomainModel() {
-        return new Seasons(
-                airDate,
-                episodeCount,
-                name,
-                overview,
-                posterPath,
-                seasonNumber,
-                voteAverage
-        );
-    }
-
-    public static SeasonsEntity fromDomainModel(Seasons seasons) {
-        return new SeasonsEntity(
-                seasons.getAir_date(),
-                seasons.getEpisode_count(),
-                seasons.getName(),
-                seasons.getOverview(),
-                seasons.getPoster_path(),
-                seasons.getSeason_number(),
-                seasons.getVote_average()
-        );
     }
 }

@@ -2,7 +2,6 @@ package com.peliculas.peliculasapp.domain.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 
 @Data
@@ -21,6 +20,4 @@ public class LastEpisode implements Serializable {
     private int season_number;
     private int show_id;
     private String still_path;
-
-
 }

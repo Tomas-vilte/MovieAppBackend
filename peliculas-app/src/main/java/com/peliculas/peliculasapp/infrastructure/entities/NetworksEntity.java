@@ -1,8 +1,11 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-import com.peliculas.peliculasapp.domain.models.Networks;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class NetworksEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,19 +22,4 @@ public class NetworksEntity {
 
     public NetworksEntity() {}
 
-    public Networks toDomainModel() {
-        return new Networks(
-                logo_path,
-                name,
-                origin_country
-        );
-    }
-
-    public static NetworksEntity fromDomainModel(Networks networks) {
-        return new NetworksEntity(
-                networks.getLogo_path(),
-                networks.getName(),
-                networks.getOrigin_country()
-        );
-    }
 }

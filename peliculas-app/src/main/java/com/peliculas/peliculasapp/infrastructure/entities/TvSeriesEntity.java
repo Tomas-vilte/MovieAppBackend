@@ -1,11 +1,12 @@
 package com.peliculas.peliculasapp.infrastructure.entities;
-import com.peliculas.peliculasapp.domain.models.*;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Entity
+@Getter
+@Setter
 public class TvSeriesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +16,6 @@ public class TvSeriesEntity {
     @JoinColumn(name = "tv_series_id")
     private List<CreatedSeriesEntity> createdBy;
     private String firstAirDate;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "tv_series_id", referencedColumnName = "id")
     private List<GenreEntity> genres;
@@ -45,6 +45,7 @@ public class TvSeriesEntity {
     private List<OriginCountryEntity> originCountry;
     private String originalLanguage;
     private String originalName;
+    @Column(length = 1000)
     private String overview;
     private float popularity;
     private String posterPath;
@@ -98,148 +99,5 @@ public class TvSeriesEntity {
         this.tagline = tagline;
         this.voteAverage = voteAverage;
         this.voteCount = voteCount;
-    }
-
-    public static TvSeriesEntity fromDomainModel(TvSeries tvSeries) {
-        List<CreatedSeriesEntity> createdSeriesEntityList = tvSeries.getCreated_by().stream()
-                .map(CreatedSeriesEntity::fromDomainModel)
-                .toList();
-
-        List<GenreEntity> genreEntityList = tvSeries.getGenres().stream()
-                .map(GenreEntity::fromDomainModel)
-                .toList();
-
-        LastEpisodeEntity lastEpisodeEntity = tvSeries.getLast_episode_to_air() != null ?
-                LastEpisodeEntity.fromDomainModel(tvSeries.getLast_episode_to_air()) :
-                null;
-
-        NextEpisodeEntity nextEpisodeEntity = tvSeries.getNext_episode_to_air() != null ?
-                NextEpisodeEntity.fromDomainModel(tvSeries.getNext_episode_to_air()) :
-                null;
-
-        List<NetworksEntity> networksEntity = tvSeries.getNetworks().stream()
-                .map(NetworksEntity::fromDomainModel)
-                .toList();
-
-        List<OriginCountryEntity> originCountryEntities = tvSeries.getOrigin_country().stream()
-                .map(OriginCountryEntity::fromDomainModel)
-                .toList();
-
-        List<ProductionCountriesEntity> productionCountriesEntities = tvSeries.getProduction_countries().stream()
-                .map(ProductionCountriesEntity::fromDomainModel)
-                .toList();
-
-        List<ProductionCompaniesEntity> productionCompanyEntities = tvSeries.getProduction_companies().stream()
-                .map(ProductionCompaniesEntity::fromDomainModel)
-                .toList();
-
-        List<SeasonsEntity> seasonsEntities = tvSeries.getSeasons().stream()
-                .map(SeasonsEntity::fromDomainModel)
-                .toList();
-
-        List<SpokenLanguagesEntity> spokenLanguagesEntities = tvSeries.getSpoken_languages().stream()
-                .map(SpokenLanguagesEntity::fromDomainModel)
-                .toList();
-
-        return new TvSeriesEntity(
-                tvSeries.getId(),
-                tvSeries.getBackdrop_path(),
-                createdSeriesEntityList,
-                tvSeries.getFirst_air_date(),
-                genreEntityList,
-                tvSeries.getHomepage(),
-                tvSeries.isIn_production(),
-                tvSeries.getLast_air_date(),
-                lastEpisodeEntity,
-                tvSeries.getName(),
-                nextEpisodeEntity,
-                networksEntity,
-                tvSeries.getNumber_of_episodes(),
-                tvSeries.getNumber_of_seasons(),
-                originCountryEntities,
-                tvSeries.getOriginal_language(),
-                tvSeries.getOriginal_name(),
-                tvSeries.getOverview(),
-                tvSeries.getPopularity(),
-                tvSeries.getPoster_path(),
-                productionCompanyEntities,
-                productionCountriesEntities,
-                seasonsEntities,
-                spokenLanguagesEntities,
-                tvSeries.getStatus(),
-                tvSeries.getTagline(),
-                tvSeries.getVote_average(),
-                tvSeries.getVote_count()
-
-        );
-    }
-
-    public Optional<TvSeries> toDomainModel() {
-        List<CreatedSeries> createdSeries = this.createdBy.stream()
-                .map(CreatedSeriesEntity::toDomainModel)
-                .toList();
-
-        List<Genre> genreList = this.genres.stream()
-                .map(GenreEntity::toDomainModel)
-                .toList();
-
-        LastEpisode lastEpisodeList = this.lastEpisodeToAir.toDomainModel();
-
-        NextEpisode nextEpisodeList = this.nextEpisodeToAir.toDomainModel();
-
-        List<Networks> networksList = this.networks.stream()
-                .map(NetworksEntity::toDomainModel)
-                .toList();
-
-        List<String> originCountryList = this.originCountry.stream()
-                .map(OriginCountryEntity::toDomainModel)
-                .toList();
-
-        List<ProductionCountries> productionCountries = this.productionCountries.stream()
-                .map(ProductionCountriesEntity::toDomainModel)
-                .collect(Collectors.toList());
-
-        List<ProductionCompany> productionCompanies = this.productionCompanies.stream()
-                .map(ProductionCompaniesEntity::toDomainModel)
-                .collect(Collectors.toList());
-
-        List<Seasons> seasonsList = this.seasons.stream()
-                .map(SeasonsEntity::toDomainModel)
-                .toList();
-
-        List<SpokenLanguages> spokenLanguagesList = this.spokenLanguages.stream()
-                .map(SpokenLanguagesEntity::toDomainModel)
-                .toList();
-
-        return Optional.of(new TvSeries(
-                id,
-                backdropPath,
-                createdSeries,
-                firstAirDate,
-                genreList,
-                homePage,
-                inProduction,
-                lastAirDate,
-                lastEpisodeList,
-                name,
-                nextEpisodeList,
-                networksList,
-                numberOfEpisodes,
-                numberOfSeasons,
-                originCountryList,
-                originalLanguage,
-                originalName,
-                overview,
-                popularity,
-                posterPath,
-                productionCompanies,
-                productionCountries,
-                seasonsList,
-                spokenLanguagesList,
-                status,
-                tagline,
-                voteAverage,
-                voteCount
-        ));
     }
 }
