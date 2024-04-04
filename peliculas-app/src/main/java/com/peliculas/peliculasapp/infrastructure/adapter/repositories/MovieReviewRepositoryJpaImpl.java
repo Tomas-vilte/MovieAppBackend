@@ -10,6 +10,7 @@ import com.peliculas.peliculasapp.infrastructure.adapter.mapper.MovieReviewMappe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -58,9 +59,11 @@ public class MovieReviewRepositoryJpaImpl implements MovieReviewRepositoryPort {
     }
 
     @Override
-    public Optional<MovieReview> findReviewsByMovieId(long reviewId) {
-        // TODO: Implement
-        return Optional.empty();
+    public List<MovieReview> findReviewsByMovieId(long reviewId) {
+        List<MovieReviewEntity> movieReviewEntities = movieReviewRepository.findReviewsByMovieId(reviewId);
+        return movieReviewEntities.stream()
+                .map(movieReviewMapper::toDomainModel)
+                .toList();
     }
 
     @Override
