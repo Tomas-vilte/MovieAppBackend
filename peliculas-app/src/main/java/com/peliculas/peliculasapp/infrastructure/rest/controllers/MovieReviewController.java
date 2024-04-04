@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,6 +24,13 @@ public class MovieReviewController {
     public ResponseEntity<?> createMovieReview(@RequestBody MovieReview movieReview) {
         Optional<MovieReviewDTO> createdReview = movieReviewService.createMovieReview(movieReview);
         SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(), "Review de pelicula creada con exito", createdReview);
+        return ResponseEntity.ok(successResponse);
+    }
+
+    @GetMapping("/movies/review/{reviewId}")
+    public ResponseEntity<?> getMovieReviewById(@PathVariable long reviewId) {
+        List<MovieReviewDTO> movieReviewDTO = movieReviewService.findReviewsByMovieId(reviewId);
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(), "Review obtenida con exito", movieReviewDTO);
         return ResponseEntity.ok(successResponse);
     }
 }
