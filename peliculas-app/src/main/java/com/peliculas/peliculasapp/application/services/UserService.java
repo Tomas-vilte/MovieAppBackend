@@ -1,7 +1,7 @@
 package com.peliculas.peliculasapp.application.services;
 import com.peliculas.peliculasapp.application.ports.in.UserCaseUse;
 import com.peliculas.peliculasapp.domain.models.User;
-import com.peliculas.peliculasapp.dto.UserDTO;
+import com.peliculas.peliculasapp.domain.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;

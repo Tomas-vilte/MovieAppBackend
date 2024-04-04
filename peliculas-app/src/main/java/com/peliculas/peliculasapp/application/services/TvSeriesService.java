@@ -1,7 +1,7 @@
 package com.peliculas.peliculasapp.application.services;
 import com.peliculas.peliculasapp.application.ports.in.GetAndSaveTvSeriesInfoUseCase;
-import com.peliculas.peliculasapp.dto.TvSeriesDTO;
-import com.peliculas.peliculasapp.dto.TvSeriesInfoDTO;
+import com.peliculas.peliculasapp.domain.dto.TvSeriesDTO;
+import com.peliculas.peliculasapp.domain.dto.TvSeriesInfoDTO;
 import org.springframework.stereotype.Service;
 
 @Service

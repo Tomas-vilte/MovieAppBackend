@@ -2,7 +2,7 @@ package com.peliculas.peliculasapp.application.usecases;
 import com.peliculas.peliculasapp.application.ports.in.MovieReviewUseCase;
 import com.peliculas.peliculasapp.application.ports.out.MovieReviewRepositoryPort;
 import com.peliculas.peliculasapp.domain.models.MovieReview;
-import com.peliculas.peliculasapp.dto.MovieReviewDTO;
+import com.peliculas.peliculasapp.domain.dto.MovieReviewDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.util.Optional;

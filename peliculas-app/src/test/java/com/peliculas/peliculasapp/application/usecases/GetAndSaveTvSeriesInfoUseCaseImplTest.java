@@ -1,13 +1,10 @@
 package com.peliculas.peliculasapp.application.usecases;
-import com.peliculas.peliculasapp.application.ports.in.GetAndSaveMovieInfoUseCase;
 import com.peliculas.peliculasapp.application.ports.in.GetAndSaveTvSeriesInfoUseCase;
-import com.peliculas.peliculasapp.application.ports.out.MovieRepositoryPort;
 import com.peliculas.peliculasapp.application.ports.out.TvSeriesRepositoryPort;
+import com.peliculas.peliculasapp.domain.dto.TvSeriesDTO;
+import com.peliculas.peliculasapp.domain.dto.TvSeriesInfoDTO;
 import com.peliculas.peliculasapp.domain.models.*;
-import com.peliculas.peliculasapp.dto.TvSeriesDTO;
-import com.peliculas.peliculasapp.dto.TvSeriesInfoDTO;
-import com.peliculas.peliculasapp.infrastructure.adapters.MovieDetailsAdapter;
-import com.peliculas.peliculasapp.infrastructure.adapters.SeriesDetailsAdapter;
+import com.peliculas.peliculasapp.infrastructure.adapter.externalservices.SeriesDetailsAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
