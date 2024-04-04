@@ -1,7 +1,7 @@
 package com.peliculas.peliculasapp.application.services;
 import com.peliculas.peliculasapp.application.ports.in.GetAndSaveMovieInfoUseCase;
-import com.peliculas.peliculasapp.dto.MovieDTO;
-import com.peliculas.peliculasapp.dto.MovieInfoDTO;
+import com.peliculas.peliculasapp.domain.dto.MovieDTO;
+import com.peliculas.peliculasapp.domain.dto.MovieInfoDTO;
 import org.springframework.stereotype.Service;
 
 

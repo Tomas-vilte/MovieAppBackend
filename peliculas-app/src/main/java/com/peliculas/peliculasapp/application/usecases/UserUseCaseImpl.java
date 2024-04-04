@@ -2,7 +2,7 @@ package com.peliculas.peliculasapp.application.usecases;
 import com.peliculas.peliculasapp.application.ports.in.UserCaseUse;
 import com.peliculas.peliculasapp.application.ports.out.UserRepositoryPort;
 import com.peliculas.peliculasapp.domain.models.User;
-import com.peliculas.peliculasapp.dto.UserDTO;
+import com.peliculas.peliculasapp.domain.dto.UserDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.peliculas.peliculasapp.application.ports.in;
 import com.peliculas.peliculasapp.domain.models.MovieReview;
-import com.peliculas.peliculasapp.dto.MovieReviewDTO;
+import com.peliculas.peliculasapp.domain.dto.MovieReviewDTO;
 
 import java.util.Optional;
 
