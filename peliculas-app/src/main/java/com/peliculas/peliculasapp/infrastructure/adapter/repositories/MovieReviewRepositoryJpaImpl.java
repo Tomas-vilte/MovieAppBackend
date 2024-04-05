@@ -5,6 +5,7 @@ import com.peliculas.peliculasapp.infrastructure.adapter.entities.MovieEntity;
 import com.peliculas.peliculasapp.infrastructure.adapter.entities.UserEntity;
 import com.peliculas.peliculasapp.infrastructure.adapter.entities.MovieReviewEntity;
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.MovieNotFoundException;
+import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.MovieReviewNotFoundException;
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.UserNotFoundException;
 import com.peliculas.peliculasapp.infrastructure.adapter.mapper.MovieReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,16 +60,26 @@ public class MovieReviewRepositoryJpaImpl implements MovieReviewRepositoryPort {
     }
 
     @Override
-    public List<MovieReview> findReviewsByMovieId(long reviewId) {
-        List<MovieReviewEntity> movieReviewEntities = movieReviewRepository.findReviewsByMovieId(reviewId);
+    public Optional<MovieReview> getMovieReviewById(long reviewId) {
+       Optional<MovieReviewEntity> movieReview = movieReviewRepository.findById(reviewId);
+        return movieReview.map(movieReviewMapper::toDomainModel);
+    }
+
+    @Override
+    public List<MovieReview> findAllReviewsByMovieId(long reviewId) {
+        List<MovieReviewEntity> movieReviewEntities = movieReviewRepository.findAllReviewsByMovieId(reviewId);
         return movieReviewEntities.stream()
                 .map(movieReviewMapper::toDomainModel)
                 .toList();
     }
 
     @Override
-    public Optional<MovieReview> deleteReviewById(long reviewId) {
-        // TODO: Implement
-        return Optional.empty();
+    public void deleteReviewById(long reviewId) {
+        Optional<MovieReviewEntity> optionalMovieReview = movieReviewRepository.findById(reviewId);
+        if (optionalMovieReview.isPresent()) {
+            movieReviewRepository.deleteById(reviewId);
+        } else {
+            throw new MovieReviewNotFoundException("La reseña de película con el ID " + reviewId + " no se encontró.");
+        }
     }
 }

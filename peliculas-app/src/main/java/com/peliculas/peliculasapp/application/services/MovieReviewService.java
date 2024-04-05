@@ -4,7 +4,6 @@ import com.peliculas.peliculasapp.domain.models.MovieReview;
 import com.peliculas.peliculasapp.domain.dto.MovieReviewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +21,10 @@ public class MovieReviewService {
     }
 
     public List<MovieReviewDTO> findReviewsByMovieId(long reviewId) {
-        return movieReviewUseCase.findReviewsByMovieId(reviewId);
+        return movieReviewUseCase.findAllReviewsByMovieId(reviewId);
+    }
+
+    public void deleteReviewById(long reviewId) {
+        movieReviewUseCase.deleteReviewById(reviewId);
     }
 }

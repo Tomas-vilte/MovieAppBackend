@@ -14,5 +14,6 @@ public interface MovieReviewRepository extends JpaRepository<MovieReviewEntity, 
             "JOIN FETCH r.user u " +
             "JOIN FETCH r.movie m " +
             "WHERE r.movie.id = :movieId")
-    List<MovieReviewEntity> findReviewsByMovieId(@Param("movieId") long movieId);
+    List<MovieReviewEntity> findAllReviewsByMovieId(@Param("movieId") long movieId);
+
 }
