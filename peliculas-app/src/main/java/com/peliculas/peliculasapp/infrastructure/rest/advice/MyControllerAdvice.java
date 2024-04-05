@@ -43,4 +43,10 @@ public class MyControllerAdvice {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.CONFLICT.value(), "Este email ya esta registrado", ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(errorResponse);
     }
+    @ExceptionHandler(MovieReviewNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handlerMovieReviewNotFoundException(MovieReviewNotFoundException e) {
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), "Review no encontrada", e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
 }

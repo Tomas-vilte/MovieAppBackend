@@ -33,4 +33,11 @@ public class MovieReviewController {
         SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(), "Review obtenida con exito", movieReviewDTO);
         return ResponseEntity.ok(successResponse);
     }
+
+    @DeleteMapping("/movies/review/{reviewId}")
+    public ResponseEntity<?> deleteReviewById(@PathVariable long reviewId) {
+        movieReviewService.deleteReviewById(reviewId);
+        SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(), "Review eliminada con exito", "Se elimino la review");
+        return ResponseEntity.ok(successResponse);
+    }
 }
