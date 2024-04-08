@@ -5,7 +5,6 @@ import com.peliculas.peliculasapp.application.ports.out.MovieReviewRepositoryPor
 import com.peliculas.peliculasapp.domain.models.MovieReview;
 import com.peliculas.peliculasapp.domain.dto.MovieReviewDTO;
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.MovieReviewNotFoundException;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,22 +15,30 @@ import java.util.stream.Collectors;
 public class MovieReviewUseCaseImpl implements MovieReviewUseCase {
     private final MovieReviewDtoMapper movieReviewMapper;
     private final MovieReviewRepositoryPort movieReviewRepositoryPort;
-    private final ModelMapper modelMapper;
     @Autowired
-    public MovieReviewUseCaseImpl(MovieReviewDtoMapper movieReviewMapper, MovieReviewRepositoryPort movieReviewRepositoryPort, ModelMapper modelMapper) {
+    public MovieReviewUseCaseImpl(MovieReviewDtoMapper movieReviewMapper, MovieReviewRepositoryPort movieReviewRepositoryPort) {
         this.movieReviewMapper = movieReviewMapper;
         this.movieReviewRepositoryPort = movieReviewRepositoryPort;
-        this.modelMapper = modelMapper;
     }
     @Override
     public Optional<MovieReviewDTO> createMovieReview(MovieReview movieReview) {
-        Optional<MovieReview> optionalMovieReview = movieReviewRepositoryPort.createMovieReview(movieReview);
-        return Optional.of(modelMapper.map(optionalMovieReview, MovieReviewDTO.class));
+        Optional<MovieReview> existingReview = movieReviewRepositoryPort.getMovieReviewById(movieReview.getId());
+
+        if (existingReview.isPresent()) {
+            MovieReview updateReview = movieReviewRepositoryPort.updateMovieReview(movieReview).orElseThrow(
+                    () -> new MovieReviewNotFoundException("No se pudo actualizar la revisión, la revisión con ID " + movieReview.getId() + " no existe.")
+            );
+            return Optional.of(movieReviewMapper.toDto(updateReview));
+        } else {
+            throw new MovieReviewNotFoundException("No se pudo actualizar la revisión, la revisión con ID " + movieReview.getId() + " no existe.");
+        }
+
     }
 
     @Override
-    public Optional<MovieReview> updateMovieReview(MovieReview review) {
-        return Optional.empty();
+    public Optional<MovieReviewDTO> updateMovieReview(MovieReview review) {
+        Optional<MovieReview> movieReview = movieReviewRepositoryPort.updateMovieReview(review);
+        return movieReview.map(movieReviewMapper::toDto);
     }
 
     @Override

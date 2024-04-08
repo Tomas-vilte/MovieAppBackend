@@ -16,10 +16,10 @@ public class MovieReview {
     @JsonProperty("user_id")
     private long userId;
     private User user;
+    private Movie movie;
     private int rating;
     @JsonProperty("review_text")
     private String reviewText;
-    private Movie movie;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

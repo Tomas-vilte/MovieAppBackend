@@ -24,6 +24,10 @@ public class MovieReviewService {
         return movieReviewUseCase.findAllReviewsByMovieId(reviewId);
     }
 
+    public Optional<MovieReviewDTO> updateMovieReview(MovieReview movieReview) {
+        return movieReviewUseCase.updateMovieReview(movieReview);
+    }
+
     public void deleteReviewById(long reviewId) {
         movieReviewUseCase.deleteReviewById(reviewId);
     }

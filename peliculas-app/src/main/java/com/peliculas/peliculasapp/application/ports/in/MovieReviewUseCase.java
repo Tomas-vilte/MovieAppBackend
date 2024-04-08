@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface MovieReviewUseCase {
     Optional<MovieReviewDTO> createMovieReview(MovieReview movieReview);
-    Optional<MovieReview> updateMovieReview(MovieReview review);
+    Optional<MovieReviewDTO> updateMovieReview(MovieReview review);
     List<MovieReviewDTO> findAllReviewsByMovieId(long reviewId);
     void deleteReviewById(long reviewId);
 }
