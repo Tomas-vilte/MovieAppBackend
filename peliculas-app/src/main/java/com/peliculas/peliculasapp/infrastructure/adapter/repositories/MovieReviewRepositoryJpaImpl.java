@@ -11,6 +11,7 @@ import com.peliculas.peliculasapp.infrastructure.adapter.mapper.MovieReviewMappe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,14 +56,24 @@ public class MovieReviewRepositoryJpaImpl implements MovieReviewRepositoryPort {
 
     @Override
     public Optional<MovieReview> updateMovieReview(MovieReview review) {
-        // TODO: Implement
-        return Optional.empty();
+       Optional<MovieReviewEntity> optionalMovieReview = movieReviewRepository.findById(review.getId());
+       if (optionalMovieReview.isPresent()) {
+           MovieReviewEntity movieReviewEntity = optionalMovieReview.get();
+           movieReviewEntity.setReviewText(review.getReviewText());
+           movieReviewEntity.setRating(review.getRating());
+           movieReviewEntity.setUpdatedAt(LocalDateTime.now());
+
+           movieReviewEntity = movieReviewRepository.save(movieReviewEntity);
+           return Optional.of(movieReviewMapper.toDomainModel(movieReviewEntity));
+       } else {
+           throw new MovieReviewNotFoundException("No se pudo actualizar la revisión, la revisión con ID " + review.getId() + " no existe.");
+       }
     }
 
     @Override
     public Optional<MovieReview> getMovieReviewById(long reviewId) {
        Optional<MovieReviewEntity> movieReview = movieReviewRepository.findById(reviewId);
-        return movieReview.map(movieReviewMapper::toDomainModel);
+       return movieReview.map(movieReviewMapper::toDomainModel);
     }
 
     @Override
