@@ -22,17 +22,8 @@ public class MovieReviewUseCaseImpl implements MovieReviewUseCase {
     }
     @Override
     public Optional<MovieReviewDTO> createMovieReview(MovieReview movieReview) {
-        Optional<MovieReview> existingReview = movieReviewRepositoryPort.getMovieReviewById(movieReview.getId());
-
-        if (existingReview.isPresent()) {
-            MovieReview updateReview = movieReviewRepositoryPort.updateMovieReview(movieReview).orElseThrow(
-                    () -> new MovieReviewNotFoundException("No se pudo actualizar la revisión, la revisión con ID " + movieReview.getId() + " no existe.")
-            );
-            return Optional.of(movieReviewMapper.toDto(updateReview));
-        } else {
-            throw new MovieReviewNotFoundException("No se pudo actualizar la revisión, la revisión con ID " + movieReview.getId() + " no existe.");
-        }
-
+        Optional<MovieReview> movieReviewOptional = movieReviewRepositoryPort.createMovieReview(movieReview);
+        return movieReviewOptional.map(movieReviewMapper::toDto);
     }
 
     @Override
