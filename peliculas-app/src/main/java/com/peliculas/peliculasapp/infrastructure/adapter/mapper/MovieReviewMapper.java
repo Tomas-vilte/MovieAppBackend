@@ -18,9 +18,11 @@ public class MovieReviewMapper {
     }
 
     public MovieReviewEntity fromDomainModel(MovieReview movieReview, MovieEntity movie, UserEntity user) {
-        MovieReviewEntity reviewEntity = modelMapper.map(movieReview, MovieReviewEntity.class);
+        MovieReviewEntity reviewEntity = new MovieReviewEntity();
         reviewEntity.setMovie(movie);
         reviewEntity.setUser(user);
+        reviewEntity.setRating(movieReview.getRating());
+        reviewEntity.setReviewText(movieReview.getReviewText());
         reviewEntity.setCreatedAt(LocalDateTime.now());
         return reviewEntity;
     }

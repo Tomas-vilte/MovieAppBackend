@@ -26,9 +26,9 @@ public class MovieReviewController {
         return ResponseEntity.ok(successResponse);
     }
 
-    @GetMapping("/movies/review/{reviewId}")
-    public ResponseEntity<?> getMovieReviewById(@PathVariable long reviewId) {
-        List<MovieReviewDTO> movieReviewDTO = movieReviewService.findReviewsByMovieId(reviewId);
+    @GetMapping("/movies/review/{movieId}")
+    public ResponseEntity<?> getMovieReviewById(@PathVariable long movieId) {
+        List<MovieReviewDTO> movieReviewDTO = movieReviewService.findReviewsByMovieId(movieId);
         SuccessResponse successResponse = new SuccessResponse(HttpStatus.OK.value(), "Review obtenida con exito", movieReviewDTO);
         return ResponseEntity.ok(successResponse);
     }
