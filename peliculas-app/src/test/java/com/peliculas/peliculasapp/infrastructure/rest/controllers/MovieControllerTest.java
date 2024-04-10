@@ -1,11 +1,10 @@
-package com.peliculas.peliculasapp.infrastructure.controllers;
+package com.peliculas.peliculasapp.infrastructure.rest.controllers;
 import com.peliculas.peliculasapp.application.services.MovieService;
 import com.peliculas.peliculasapp.domain.models.Genre;
 import com.peliculas.peliculasapp.domain.models.ProductionCompany;
 import com.peliculas.peliculasapp.domain.models.ProductionCountries;
 import com.peliculas.peliculasapp.domain.dto.MovieDTO;
 import com.peliculas.peliculasapp.domain.dto.MovieInfoDTO;
-import com.peliculas.peliculasapp.infrastructure.rest.controllers.MovieController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,10 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
