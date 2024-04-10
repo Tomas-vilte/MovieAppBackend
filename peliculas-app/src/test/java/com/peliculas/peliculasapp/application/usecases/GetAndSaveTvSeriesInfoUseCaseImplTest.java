@@ -227,61 +227,52 @@ class GetAndSaveTvSeriesInfoUseCaseImplTest {
         tvSeriesInfoDTO.setNumber_of_episodes(62);
         tvSeriesInfoDTO.setNumber_of_seasons(5);
 
-        // Set sample data for created_by list
         List<CreatedSeries> createdSeriesList = new ArrayList<>();
         CreatedSeries creator = new CreatedSeries();
         creator.setName("Vince Gilligan");
         createdSeriesList.add(creator);
         tvSeriesInfoDTO.setCreated_by(createdSeriesList);
 
-        // Set sample data for genres list
         List<Genre> genreList = new ArrayList<>();
         Genre genre = new Genre();
         genre.setName("Drama");
         genreList.add(genre);
         tvSeriesInfoDTO.setGenres(genreList);
 
-        // Set sample data for last_episode_to_air
         LastEpisode lastEpisode = new LastEpisode();
         lastEpisode.setEpisode_number(16);
         lastEpisode.setName("Felina");
         lastEpisode.setAir_date("2013-09-29");
         tvSeriesInfoDTO.setLast_episode_to_air(lastEpisode);
 
-        // Set sample data for networks list
         List<Networks> networksList = new ArrayList<>();
         Networks network = new Networks();
         network.setName("AMC");
         networksList.add(network);
         tvSeriesInfoDTO.setNetworks(networksList);
 
-        // Set sample data for origin_country list
         List<String> originCountryList = new ArrayList<>();
         originCountryList.add("US");
         tvSeriesInfoDTO.setOrigin_country(originCountryList);
 
-        // Set sample data for seasons list
         List<Seasons> seasonsList = new ArrayList<>();
         Seasons season = new Seasons();
         season.setSeason_number(1);
         seasonsList.add(season);
         tvSeriesInfoDTO.setSeasons(seasonsList);
 
-        // Set sample data for production_companies list
         List<ProductionCompany> productionCompanyList = new ArrayList<>();
         ProductionCompany productionCompany = new ProductionCompany();
         productionCompany.setName("Sony Pictures Television");
         productionCompanyList.add(productionCompany);
         tvSeriesInfoDTO.setProduction_companies(productionCompanyList);
 
-        // Set sample data for production_countries list
         List<ProductionCountries> productionCountriesList = new ArrayList<>();
         ProductionCountries productionCountry = new ProductionCountries();
         productionCountry.setName("United States of America");
         productionCountriesList.add(productionCountry);
         tvSeriesInfoDTO.setProduction_countries(productionCountriesList);
 
-        // Set sample data for spoken_languages list
         List<SpokenLanguages> spokenLanguagesList = new ArrayList<>();
         SpokenLanguages spokenLanguage = new SpokenLanguages();
         spokenLanguage.setName("English");
