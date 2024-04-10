@@ -6,6 +6,7 @@ import com.peliculas.peliculasapp.domain.dto.TvSeriesDTO;
 import com.peliculas.peliculasapp.domain.dto.TvSeriesInfoDTO;
 import com.peliculas.peliculasapp.infrastructure.adapter.externalservices.SeriesDetailsAdapter;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import java.time.Duration;
@@ -18,6 +19,7 @@ public class GetAndSaveTvSeriesInfoUseCaseImpl implements GetAndSaveTvSeriesInfo
     private final ModelMapper modelMapper;
     private final ValueOperations<String, Object> valueOperations;
 
+    @Autowired
     public GetAndSaveTvSeriesInfoUseCaseImpl(TvSeriesRepositoryPort tvSeriesRepositoryPort,
                                              SeriesDetailsAdapter seriesDetailsAdapter,
                                              ModelMapper modelMapper,
