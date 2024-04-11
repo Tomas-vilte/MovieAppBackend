@@ -43,10 +43,10 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
     @Transactional(readOnly = false)
     public Optional<User> deleteUser(long userId) {
         Optional<UserEntity> existingUser = userRepository.findById(userId);
-        return existingUser.map(userEntity -> {
+        return Optional.ofNullable(existingUser.map(userEntity -> {
             userRepository.delete(userEntity);
             return userMapper.toDomainModel(userEntity);
-        }).or(Optional::empty);
+        }).orElseThrow(() -> new UserNotFoundException("No se encontró ningún usuario con el ID: " + userId)));
     }
 
     @Override
@@ -58,6 +58,13 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
             return userMapper.toDomainModel(userRepository.save(existingUser));
         }).orElseThrow(() -> new UserNotFoundException("Usuario no encontrado con ID: " + user.getId())));
     }
+
+    public Optional<UserEntity> findUserById(long userId) {
+        return Optional.of(userRepository.findById(userId).orElseThrow(
+                () -> new UserNotFoundException("Usuario no encontrado con este ID: " + userId)
+        ));
+    }
+
     private void updateUserFields(User source, UserEntity target) {
         target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());

@@ -1,5 +1,6 @@
 package com.peliculas.peliculasapp.application.ports.out;
 import com.peliculas.peliculasapp.domain.models.User;
+import com.peliculas.peliculasapp.infrastructure.adapter.entities.UserEntity;
 
 import java.util.Optional;
 
