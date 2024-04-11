@@ -96,7 +96,7 @@ class MovieReviewServiceTest {
     }
 
     private MovieReview createDummyMovieReview() {
-        User user = new User(1L, "username", "password", "user@example.com");
+        User user = new User(1L, "username", "password", "user@example.com",LocalDateTime.now(), LocalDateTime.now());
         Movie movie = createDummyMovie();
         return new MovieReview(
                 1,

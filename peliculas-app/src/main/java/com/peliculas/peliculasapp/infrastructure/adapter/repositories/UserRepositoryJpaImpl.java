@@ -5,16 +5,19 @@ import com.peliculas.peliculasapp.infrastructure.adapter.entities.UserEntity;
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.EmailAlreadyExistsException;
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.UserNotFoundException;
 import com.peliculas.peliculasapp.infrastructure.adapter.mapper.UserMapper;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-@Repository
+@Service
+@Transactional
 public class UserRepositoryJpaImpl implements UserRepositoryPort {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
+    @Autowired
     public UserRepositoryJpaImpl(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
@@ -57,12 +60,6 @@ public class UserRepositoryJpaImpl implements UserRepositoryPort {
             updateUserFields(user, existingUser);
             return userMapper.toDomainModel(userRepository.save(existingUser));
         }).orElseThrow(() -> new UserNotFoundException("Usuario no encontrado con ID: " + user.getId())));
-    }
-
-    public Optional<UserEntity> findUserById(long userId) {
-        return Optional.of(userRepository.findById(userId).orElseThrow(
-                () -> new UserNotFoundException("Usuario no encontrado con este ID: " + userId)
-        ));
     }
 
     private void updateUserFields(User source, UserEntity target) {

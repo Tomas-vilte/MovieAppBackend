@@ -6,10 +6,12 @@ import com.peliculas.peliculasapp.infrastructure.adapter.mapper.MovieEntityMappe
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.MovieAlreadyExistsException;
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.MovieNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
-@Component
+@Service
+@Transactional
 public class MovieRepositoryJpaImpl implements MovieRepositoryPort {
     private final MovieRepository movieRepositoryJpa;
     private final MovieEntityMapper movieEntityMapper;

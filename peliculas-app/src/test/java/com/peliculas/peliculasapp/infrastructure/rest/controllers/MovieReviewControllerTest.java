@@ -209,7 +209,7 @@ class MovieReviewControllerTest {
 
     private MovieReview createDummyMovieReview() {
         MovieReview movieReview = new MovieReview();
-        User user = new User(1, "username", "password", "user@example.com");
+        User user = new User(1, "username", "password", "user@example.com", LocalDateTime.now(), LocalDateTime.now());
         Movie movie = createDummyMovie();
         return new MovieReview(
                 1,
