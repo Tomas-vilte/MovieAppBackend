@@ -1,5 +1,4 @@
 package com.peliculas.peliculasapp.application.mapper;
-
 import com.peliculas.peliculasapp.domain.dto.UserDTO;
 import com.peliculas.peliculasapp.domain.models.User;
 import org.springframework.stereotype.Component;

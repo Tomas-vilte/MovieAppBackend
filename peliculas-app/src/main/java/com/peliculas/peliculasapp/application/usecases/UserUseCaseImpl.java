@@ -3,6 +3,7 @@ import com.peliculas.peliculasapp.application.ports.in.UserCaseUse;
 import com.peliculas.peliculasapp.application.ports.out.UserRepositoryPort;
 import com.peliculas.peliculasapp.domain.models.User;
 import com.peliculas.peliculasapp.domain.dto.UserDTO;
+import com.peliculas.peliculasapp.infrastructure.adapter.entities.UserEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
@@ -39,6 +40,6 @@ public class UserUseCaseImpl implements UserCaseUse {
     @Override
     public Optional<UserDTO> updateUser(User user) {
         Optional<User> updateUser = userRepositoryPort.updateUser(user);
-        return Optional.of(modelMapper.map(updateUser, UserDTO.class));
+        return updateUser.map(u -> modelMapper.map(u, UserDTO.class));
     }
 }
