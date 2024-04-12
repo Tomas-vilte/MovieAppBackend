@@ -46,7 +46,7 @@ public class MovieReviewRepositoryJpaImpl implements MovieReviewRepositoryPort {
 
     private MovieEntity findMovieById(long movieId) {
         return movieRepository.findById(movieId)
-                .orElseThrow(() -> new MovieNotFoundException("Pelicula no encontrada"));
+                .orElseThrow(() -> new MovieNotFoundException("Pelicula no encontrada con el ID: " + movieId));
     }
 
     private UserEntity findUserById(long userId) {
