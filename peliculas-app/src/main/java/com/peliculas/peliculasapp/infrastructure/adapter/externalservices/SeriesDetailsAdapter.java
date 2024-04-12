@@ -3,6 +3,7 @@ import com.peliculas.peliculasapp.application.config.ApiConfiguration;
 import com.peliculas.peliculasapp.application.ports.out.TvSeriesServicePort;
 import com.peliculas.peliculasapp.domain.models.TvSeries;
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.TvSeriesNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
@@ -14,6 +15,7 @@ public class SeriesDetailsAdapter implements TvSeriesServicePort {
     private final ApiConfiguration apiConfiguration;
     private final RestTemplate restTemplate;
 
+    @Autowired
     public SeriesDetailsAdapter(ApiConfiguration apiConfiguration, RestTemplate restTemplate) {
         this.apiConfiguration = apiConfiguration;
         this.restTemplate = restTemplate;
