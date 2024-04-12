@@ -32,7 +32,7 @@ public class Movie {
 
     private String release_date;
 
-    private Movie() {}
+    public Movie() {}
 
     public Movie(long id, String overview, String status, List<ProductionCompany> productionCompanies, List<Genre> genres, List<ProductionCountries> productionCountries, String title, float voteAverage, float voteCount, long revenue, int budget, float popularity, String posterPath, String releaseDate) {
         this.id = id;

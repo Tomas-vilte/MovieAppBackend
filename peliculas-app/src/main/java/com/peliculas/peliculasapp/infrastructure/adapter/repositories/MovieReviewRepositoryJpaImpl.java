@@ -9,13 +9,13 @@ import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.MovieReviewN
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.UserNotFoundException;
 import com.peliculas.peliculasapp.infrastructure.adapter.mapper.MovieReviewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Service
 @Transactional
 public class MovieReviewRepositoryJpaImpl implements MovieReviewRepositoryPort {
     private final MovieReviewRepository movieReviewRepository;
@@ -46,7 +46,7 @@ public class MovieReviewRepositoryJpaImpl implements MovieReviewRepositoryPort {
 
     private MovieEntity findMovieById(long movieId) {
         return movieRepository.findById(movieId)
-                .orElseThrow(() -> new MovieNotFoundException("Pelicula no encontrada"));
+                .orElseThrow(() -> new MovieNotFoundException("Pelicula no encontrada con el ID: " + movieId));
     }
 
     private UserEntity findUserById(long userId) {

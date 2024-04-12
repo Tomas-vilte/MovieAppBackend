@@ -14,7 +14,9 @@ public class UserMapper implements EntityMapper<UserEntity, User> {
                 userEntity.getId(),
                 userEntity.getUsername(),
                 userEntity.getEmail(),
-                userEntity.getPassword()
+                userEntity.getPassword(),
+                userEntity.getCreatedAt(),
+                userEntity.getUpdatedAt()
         );
     }
 

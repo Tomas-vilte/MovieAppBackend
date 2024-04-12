@@ -3,6 +3,7 @@ import com.peliculas.peliculasapp.application.config.ApiConfiguration;
 import com.peliculas.peliculasapp.application.ports.out.MovieServicePort;
 import com.peliculas.peliculasapp.domain.models.Movie;
 import com.peliculas.peliculasapp.infrastructure.adapter.exceptions.MovieNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
@@ -13,6 +14,7 @@ public class MovieDetailsAdapter implements MovieServicePort {
     private final ApiConfiguration apiConfiguration;
     private final RestTemplate restTemplate;
 
+    @Autowired
     public MovieDetailsAdapter(ApiConfiguration apiConfiguration, RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
         this.apiConfiguration = apiConfiguration;
