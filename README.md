@@ -29,7 +29,7 @@ Antes de ejecutar el proyecto, asegúrate de configurar las siguientes variables
 - `EXTERNAL_API_KEY`: Esta variable debe contener tu API_KEY para acceder a la API externa de películas y series. Puedes obtener una clave API registrándote en [The Movie Database (TMDb)](https://www.themoviedb.org/documentation/api) y accediendo a tu panel de control.
 - `API_URL`: Esta variable debe contener la URL base de la API externa. La URL base de la API de TMDb es `https://api.themoviedb.org/3/`.
 
-Puedes configurar estas variables de entorno en el archivo [`config.env`](/peliculas-app/src/main/resources/config.env) en la raíz del proyecto. Asegúrate de reemplazar `Aca pone tu API_KEY` con tu clave API de TMDb y `Aca pone tu API_URL` con `https://api.themoviedb.org/3/`.
+Puedes configurar estas variables de entorno en el archivo [`config.env`](/src/main/resources/config.env) en la raíz del proyecto. Asegúrate de reemplazar `Aca pone tu API_KEY` con tu clave API de TMDb y `Aca pone tu API_URL` con `https://api.themoviedb.org/3/`.
 
 2. Ejecuta los servicios necesarios utilizando Docker Compose:
     ```bash
@@ -52,7 +52,7 @@ docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mysq
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' redis_movie
 ```
 
-Actualiza las direcciones de MySQL y Redis en el archivo [`application.properties`](/peliculas-app/src/main/resources/application.properties) con las IP obtenidas:
+Actualiza las direcciones de MySQL y Redis en el archivo [`application.properties`](/src/main/resources/application.properties) con las IP obtenidas:
 
 
 ```properties
