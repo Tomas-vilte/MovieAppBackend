@@ -36,43 +36,7 @@ Puedes configurar estas variables de entorno en el archivo [`config.env`](/src/m
     docker compose up -d 
     ```
 
-## Configuración de MySQL y Redis
-
-Para configurar las direcciones IP de MySQL y Redis, sigue estos pasos:
-
-1. Para MySQL, ejecuta el siguiente comando en la terminal para obtener la dirección IP del contenedor MySQL:
-   
-```bash
-docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mysql_movie
-```
-
-2. Para Redis, ejecuta el siguiente comando en la terminal para obtener la dirección IP del contenedor Redis:
-   
-```bash
-docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' redis_movie
-```
-
-Actualiza las direcciones de MySQL y Redis en el archivo [`application.properties`](/src/main/resources/application.properties) con las IP obtenidas:
-
-
-```properties
-# MySQL
-spring.datasource.url=jdbc:mysql://<IP_MySQL>:3307/moviedb
-spring.jpa.generate-ddl=true
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.username=appmovie
-spring.datasource.password=appmovie
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.initialization-mode=always
-spring.datasource.platform=mysql
-
-
-# Redis
-spring.redis.host=<IP_Redis>
-spring.redis.port=6379
-```
-
-4. El backend estará disponible en la URL:
+3. El backend estará disponible en la URL:
     ```
     http://localhost:8080
     ```

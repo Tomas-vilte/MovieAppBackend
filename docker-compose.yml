@@ -1,23 +1,40 @@
 version: '3'
 services:
+  spring-app:
+    container_name: java_app
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - movie-networks
+    environment:
+      - MYSQL_URL=jdbc:mysql://mysql_movie:3307/moviedb
+      - DATABASE_USERNAME=appmovie
+      - DATABASE_PASSWORD=appmovie
+      - REDIS_HOST=redis_movie
+    depends_on:
+      - mysql
+      - redis
+
   mysql:
     image: mysql:8.3.0
     container_name: mysql_movie
     restart: always
     env_file: ./docker/.env-non-dev
     ports:
-      - '3307:3306'
+      - "3307:3306"
     volumes:
       - my-db:/var/lib/mysql
     networks:
       - movie-networks
+
   redis:
     container_name: redis_movie
     image: redis:7.2
     networks:
       - movie-networks
     expose:
-      - 6379
+      - "6379"
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
@@ -28,5 +45,6 @@ services:
 
 volumes:
   my-db:
+
 networks:
   movie-networks:
